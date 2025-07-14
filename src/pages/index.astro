@@ -1,0 +1,61 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero';
+import ServicesPreview from '../components/ServicesPreview';
+---
+
+<Layout title="LMP Consulting GmbH - IT-Beratung, Projektleitung & Change Management">
+  <Header />
+  <main>
+    <Hero client:load />
+    <ServicesPreview client:load />
+    
+    <!-- Stats Section -->
+    <section class="section bg-secondary-50">
+      <div class="container">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          <div class="animate-fade-in">
+            <div class="text-4xl lg:text-5xl font-bold text-primary mb-2">15+</div>
+            <div class="text-secondary-600">Jahre Erfahrung</div>
+          </div>
+          <div class="animate-fade-in" style="animation-delay: 0.1s;">
+            <div class="text-4xl lg:text-5xl font-bold text-primary mb-2">50+</div>
+            <div class="text-secondary-600">Erfolgreiche Projekte</div>
+          </div>
+          <div class="animate-fade-in" style="animation-delay: 0.2s;">
+            <div class="text-4xl lg:text-5xl font-bold text-primary mb-2">100%</div>
+            <div class="text-secondary-600">Kundenzufriedenheit</div>
+          </div>
+          <div class="animate-fade-in" style="animation-delay: 0.3s;">
+            <div class="text-4xl lg:text-5xl font-bold text-primary mb-2">24/7</div>
+            <div class="text-secondary-600">Support</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section bg-gradient-primary text-white">
+      <div class="container text-center">
+        <h2 class="heading-2 mb-4 text-white">
+          Bereit für Ihre digitale Transformation?
+        </h2>
+        <p class="text-large mb-8 text-white/90 max-w-2xl mx-auto">
+          Lassen Sie uns gemeinsam Ihre IT-Herausforderungen analysieren und 
+          maßgeschneiderte Lösungen entwickeln.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/kontakt" class="btn bg-white text-primary hover:bg-secondary-100">
+            Kostenlose Erstberatung
+          </a>
+          <a href="/projekte" class="btn border-2 border-white text-white hover:bg-white hover:text-primary">
+            Referenzen ansehen
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

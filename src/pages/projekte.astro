@@ -1,0 +1,301 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const projects = [
+  {
+    title: "IT Transformation Manager",
+    company: "Mercedes Benz Schweiz",
+    period: "Juli 2024 - Juli 2025",
+    status: "Aktuell",
+    description: "Leitung von IT-Transformationsprojekten mit Fokus auf die Einführung neuer Sales Applikationen",
+    highlights: [
+      "Fahrzeugkonfigurationen, Ordermanagement und Ordertracking",
+      "RPA und KI-basierte Optimierungsprojekte",
+      "Hybride Projektmanagementmethoden und SAP Activate",
+      "KPI-gestütztes Reporting mit globalen Stakeholdern",
+      "Change-Management-Methoden",
+      "IT-Governance und ISO-Dokumentation"
+    ],
+    technologies: ["SAP", "RPA", "KI/AI", "Sales Applications"],
+    category: "IT Transformation"
+  },
+  {
+    title: "IT Project Manager",
+    company: "ITERGO Köln",
+    period: "Sept. 2021 - Juni 2024",
+    status: "Abgeschlossen",
+    description: "Leitung von parallelen IT-Projekten mit internationalen Teams und Budgets bis zu 1.000.000€",
+    highlights: [
+      "Software-Migrationen und IT-Transformationen",
+      "Prozess- und Systemoptimierung",
+      "PRINCE2, Scrum und hybride Methoden",
+      "Wissensmanagement und Ressourcenplanung",
+      "Stakeholder-Management und Change-Prozesse",
+      "Risikomanagement und Budgetcontrolling"
+    ],
+    technologies: ["PRINCE2", "Scrum", "Agile", "Change Management"],
+    category: "Projektmanagement"
+  },
+  {
+    title: "Dualer Student Wirtschaftsinformatik",
+    company: "ITERGO Düsseldorf",
+    period: "Aug. 2018 - Aug. 2021",
+    status: "Abgeschlossen",
+    description: "Umfassende Ausbildung in Softwareentwicklung, Requirements Engineering und Business Analyse",
+    highlights: [
+      "Sechs Abteilungen an drei Standorten",
+      "Automatisiertes Reporting entwickelt",
+      "RPA- und Voice-Bot-Projekte",
+      "Geschäftsprozess-Automatisierung",
+      "Soft-Skills und Technical-Skills Training"
+    ],
+    technologies: ["Python", "COBOL", "SQL", "VBA", "RPA"],
+    category: "Ausbildung & Entwicklung"
+  }
+];
+
+const categories = ["Alle", "IT Transformation", "Projektmanagement", "Ausbildung & Entwicklung"];
+---
+
+<Layout 
+  title="Projekte & Referenzen - LMP Consulting GmbH" 
+  description="Erfolgreiche IT-Projekte und Referenzen von LMP Consulting GmbH - IT Transformation, Projektmanagement und Change Management."
+>
+  <Header />
+  <main class="pt-16 lg:pt-20">
+    <!-- Hero Section -->
+    <section class="section bg-gradient-to-br from-secondary-50 to-white">
+      <div class="container">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="heading-1 mb-6">
+            Projekte & <span class="text-gradient">Referenzen</span>
+          </h1>
+          <p class="text-large">
+            Erfolgreiche IT-Transformationen und Projektleitungen in verschiedenen Branchen
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="py-8 bg-white border-b border-secondary-200">
+      <div class="container">
+        <div class="flex flex-wrap justify-center gap-4">
+          {categories.map((category) => (
+            <button 
+              class={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                category === "Alle" 
+                  ? "bg-primary text-white" 
+                  : "bg-secondary-100 text-secondary-700 hover:bg-primary hover:text-white"
+              }`}
+              data-filter={category}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="section">
+      <div class="container">
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <div 
+              class="card group hover:scale-105 project-card"
+              data-category={project.category}
+              style={`animation-delay: ${index * 0.1}s`}
+            >
+              <!-- Status Badge -->
+              <div class="flex items-center justify-between mb-4">
+                <span class={`px-3 py-1 rounded-full text-xs font-semibold ${
+                  project.status === "Aktuell" 
+                    ? "bg-green-100 text-green-800" 
+                    : "bg-blue-100 text-blue-800"
+                }`}>
+                  {project.status}
+                </span>
+                <span class="text-sm text-secondary-500">{project.period}</span>
+              </div>
+
+              <!-- Project Header -->
+              <div class="mb-4">
+                <h3 class="heading-3 mb-2 group-hover:text-primary transition-colors duration-300">
+                  {project.title}
+                </h3>
+                <div class="flex items-center text-primary font-semibold mb-2">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H3m2 0h4M9 7h6m-6 4h6m-6 4h6m-6 4h6" />
+                  </svg>
+                  {project.company}
+                </div>
+                <p class="text-body">{project.description}</p>
+              </div>
+
+              <!-- Key Highlights -->
+              <div class="mb-6">
+                <h4 class="font-semibold text-secondary-900 mb-3">Schwerpunkte:</h4>
+                <ul class="space-y-2">
+                  {project.highlights.slice(0, 4).map((highlight) => (
+                    <li class="flex items-start text-sm text-secondary-600">
+                      <svg class="w-4 h-4 text-primary mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                      {highlight}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <!-- Technologies -->
+              <div class="mb-4">
+                <div class="flex flex-wrap gap-2">
+                  {project.technologies.map((tech) => (
+                    <span class="px-2 py-1 bg-secondary-100 text-secondary-700 text-xs rounded-md">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Category -->
+              <div class="pt-4 border-t border-secondary-200">
+                <span class="text-xs text-secondary-500 uppercase tracking-wide">
+                  {project.category}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section bg-secondary-50">
+      <div class="container">
+        <div class="text-center mb-12">
+          <h2 class="heading-2 mb-4">Projekterfolge in Zahlen</h2>
+          <p class="text-large text-secondary-600">Messbare Ergebnisse unserer Arbeit</p>
+        </div>
+        
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          <div class="animate-fade-in">
+            <div class="text-4xl lg:text-5xl font-bold text-primary mb-2">6+</div>
+            <div class="text-secondary-600">Jahre Erfahrung</div>
+          </div>
+          <div class="animate-fade-in" style="animation-delay: 0.1s;">
+            <div class="text-4xl lg:text-5xl font-bold text-primary mb-2">€1M+</div>
+            <div class="text-secondary-600">Projektbudgets geleitet</div>
+          </div>
+          <div class="animate-fade-in" style="animation-delay: 0.2s;">
+            <div class="text-4xl lg:text-5xl font-bold text-primary mb-2">15+</div>
+            <div class="text-secondary-600">Erfolgreiche Projekte</div>
+          </div>
+          <div class="animate-fade-in" style="animation-delay: 0.3s;">
+            <div class="text-4xl lg:text-5xl font-bold text-primary mb-2">100%</div>
+            <div class="text-secondary-600">Projekterfolgsrate</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Expertise Areas -->
+    <section class="section">
+      <div class="container">
+        <div class="text-center mb-12">
+          <h2 class="heading-2 mb-4">Expertise-Bereiche</h2>
+          <p class="text-large text-secondary-600">Spezialisierung in verschiedenen IT-Disziplinen</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="card text-center">
+            <div class="text-primary mb-4">
+              <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+              </svg>
+            </div>
+            <h3 class="heading-3 mb-3">SAP & ERP</h3>
+            <p class="text-body">SAP Activate, ERP-Implementierungen und Systemintegrationen</p>
+          </div>
+
+          <div class="card text-center">
+            <div class="text-primary mb-4">
+              <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <h3 class="heading-3 mb-3">Automatisierung</h3>
+            <p class="text-body">RPA, KI-Integration und Prozessoptimierung</p>
+          </div>
+
+          <div class="card text-center">
+            <div class="text-primary mb-4">
+              <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <h3 class="heading-3 mb-3">Agile Methoden</h3>
+            <p class="text-body">Scrum, PRINCE2 und hybride Projektmanagement-Ansätze</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section bg-gradient-primary text-white">
+      <div class="container text-center">
+        <h2 class="heading-2 mb-4 text-white">
+          Ihr nächstes Projekt wartet
+        </h2>
+        <p class="text-large mb-8 text-white/90 max-w-2xl mx-auto">
+          Lassen Sie uns gemeinsam Ihre IT-Herausforderungen analysieren und 
+          maßgeschneiderte Lösungen entwickeln.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/kontakt" class="btn bg-white text-primary hover:bg-secondary-100">
+            Projekt besprechen
+          </a>
+          <a href="/leistungen" class="btn border-2 border-white text-white hover:bg-white hover:text-primary">
+            Unsere Leistungen
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+
+  <script>
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('[data-filter]');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-filter');
+        
+        // Update active button
+        filterButtons.forEach(btn => {
+          btn.classList.remove('bg-primary', 'text-white');
+          btn.classList.add('bg-secondary-100', 'text-secondary-700');
+        });
+        button.classList.remove('bg-secondary-100', 'text-secondary-700');
+        button.classList.add('bg-primary', 'text-white');
+        
+        // Filter projects
+        projectCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'Alle' || category === filter) {
+            card.style.display = 'block';
+            card.style.animation = 'fadeIn 0.6s ease-out';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</Layout>

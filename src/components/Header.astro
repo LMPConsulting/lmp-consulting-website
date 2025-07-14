@@ -1,0 +1,130 @@
+---
+import { motion } from 'framer-motion';
+
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/leistungen', label: 'Leistungen' },
+  { href: '/projekte', label: 'Projekte' },
+  { href: '/profil', label: 'Profil' },
+  { href: '/kontakt', label: 'Kontakt' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-secondary-200">
+  <nav class="container" aria-label="Hauptnavigation">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center space-x-2 group" aria-label="LMP Consulting - Startseite">
+        <div class="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-primary rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+          <span class="text-white font-bold text-lg lg:text-xl">L</span>
+        </div>
+        <div class="hidden sm:block">
+          <div class="text-lg lg:text-xl font-bold text-secondary-900">LMP Consulting</div>
+          <div class="text-xs lg:text-sm text-secondary-600">GmbH</div>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center space-x-8">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class={`text-sm font-medium transition-colors duration-300 hover:text-primary relative ${
+              currentPath === item.href 
+                ? 'text-primary' 
+                : 'text-secondary-700'
+            }`}
+            aria-current={currentPath === item.href ? 'page' : undefined}
+          >
+            {item.label}
+            {currentPath === item.href && (
+              <div class="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"></div>
+            )}
+          </a>
+        ))}
+      </div>
+
+      <!-- CTA Button -->
+      <div class="hidden lg:block">
+        <a href="/kontakt" class="btn-primary">
+          Kontakt aufnehmen
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-button"
+        class="lg:hidden p-2 text-secondary-700 hover:text-primary transition-colors duration-300"
+        aria-label="Menü öffnen"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-secondary-200 shadow-soft transform -translate-y-full opacity-0 transition-all duration-300 pointer-events-none"
+      aria-hidden="true"
+    >
+      <div class="container py-4 space-y-4">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class={`block py-2 text-base font-medium transition-colors duration-300 ${
+              currentPath === item.href 
+                ? 'text-primary' 
+                : 'text-secondary-700 hover:text-primary'
+            }`}
+            aria-current={currentPath === item.href ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+        <div class="pt-4 border-t border-secondary-200">
+          <a href="/kontakt" class="btn-primary w-full justify-center">
+            Kontakt aufnehmen
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', () => {
+      const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+      
+      mobileMenuButton.setAttribute('aria-expanded', (!isExpanded).toString());
+      mobileMenu.setAttribute('aria-hidden', isExpanded.toString());
+      
+      if (isExpanded) {
+        mobileMenu.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+      } else {
+        mobileMenu.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
+      }
+    });
+  }
+  
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (mobileMenu && mobileMenuButton && 
+        !mobileMenu.contains(e.target as Node) && 
+        !mobileMenuButton.contains(e.target as Node)) {
+      mobileMenuButton.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      mobileMenu.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+    }
+  });
+</script>
