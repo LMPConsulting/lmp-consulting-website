@@ -33,7 +33,4 @@ export default defineConfig({
       },
     },
   },
-  experimental: {
-    optimizeHoistedScript: true,
-  },
 });
