@@ -9,7 +9,7 @@ import Footer from '../components/Footer.astro';
   description="IT-Beratung, Projektleitung und Change Management - Unsere umfassenden Dienstleistungen für Ihre digitale Transformation."
 >
   <Header />
-  <main class="pt-20 lg:pt-24">
+  <main class="pt-20 lg:pt-24" role="main" id="main-content">
     <!-- Hero Section -->
     <section class="section bg-gradient-to-br from-primary-50 via-white to-accent-50 relative overflow-hidden">
       <!-- Background Elements -->
@@ -64,9 +64,9 @@ import Footer from '../components/Footer.astro';
     </section>
 
     <!-- Services Section -->
-    <section class="section-compact bg-white">
+    <section class="section-compact bg-surface dark:bg-gray-900" aria-label="Unsere Dienstleistungen">
       <div class="container">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           <!-- IT-Beratung -->
           <div class="card-feature group relative overflow-hidden">
             <div class="absolute top-0 right-0 w-32 h-32 opacity-5 group-hover:opacity-10 transition-opacity duration-500">

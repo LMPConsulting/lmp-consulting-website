@@ -6,10 +6,26 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
   
   body {
-    @apply font-sans text-secondary-900 bg-white;
+    @apply font-sans text-gray-800 leading-relaxed antialiased bg-surface dark:bg-gray-900 dark:text-gray-100;
+    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  }
+
+  /* Typography improvements */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  p {
+    max-width: 75ch;
+  }
+
+  /* Focus improvements */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-surface dark:ring-offset-gray-900;
   }
   
   /* Reduced motion support */
@@ -23,6 +39,13 @@
       scroll-behavior: auto !important;
     }
   }
+
+  /* Dark mode improvements */
+  @media (prefers-color-scheme: dark) {
+    html:not(.light) {
+      color-scheme: dark;
+    }
+  }
 }
 
 @layer components {
@@ -31,71 +54,76 @@
   }
   
   .btn-primary {
-    @apply btn bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:from-primary-600 hover:to-primary-700 focus:ring-primary-500 shadow-lg hover:shadow-xl border border-primary-600;
+    @apply btn bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-600 dark:to-primary-700 text-white hover:from-primary-600 hover:to-primary-700 dark:hover:from-primary-700 dark:hover:to-primary-800 focus:ring-primary-500 shadow-soft-md hover:shadow-soft-lg border border-primary-600 dark:border-primary-700;
   }
   
   .btn-secondary {
-    @apply btn bg-white text-primary border-2 border-primary-200 hover:border-primary hover:bg-primary hover:text-white focus:ring-primary-500 shadow-md hover:shadow-lg;
+    @apply btn bg-surface dark:bg-gray-800 text-primary dark:text-primary-400 border-2 border-primary-200 dark:border-primary-700 hover:border-primary hover:bg-primary hover:text-white dark:hover:bg-primary-600 focus:ring-primary-500 shadow-soft hover:shadow-soft-md;
   }
   
   .btn-accent {
-    @apply btn bg-gradient-to-r from-accent-400 to-accent-500 text-white hover:from-accent-500 hover:to-accent-600 focus:ring-accent-500 shadow-lg hover:shadow-xl;
+    @apply btn bg-gradient-to-r from-accent-400 to-accent-500 dark:from-accent-500 dark:to-accent-600 text-white hover:from-accent-500 hover:to-accent-600 dark:hover:from-accent-600 dark:hover:to-accent-700 focus:ring-accent-500 shadow-soft-md hover:shadow-soft-lg;
   }
   
   .btn-ghost {
-    @apply btn bg-transparent text-secondary-700 hover:bg-secondary-100 hover:text-secondary-900 border border-secondary-300 hover:border-secondary-400;
+    @apply btn bg-transparent text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 border border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500;
   }
   
   .card {
-    @apply bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 p-8 border border-secondary-100 hover:border-secondary-200;
+    @apply bg-surface dark:bg-gray-800 rounded-lg shadow-soft hover:shadow-soft-lg transition-all duration-300 p-6 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600;
   }
   
   .card-interactive {
-    @apply card hover:scale-105 cursor-pointer;
+    @apply card hover:scale-[1.02] cursor-pointer;
   }
   
   .card-feature {
-    @apply card bg-gradient-to-br from-white to-secondary-50 hover:from-primary-50 hover:to-accent-50;
+    @apply card bg-gradient-to-br from-surface to-muted-50 dark:from-gray-800 dark:to-gray-700 hover:from-primary-50 hover:to-accent-50 dark:hover:from-gray-700 dark:hover:to-gray-600;
   }
   
   .container {
-    @apply max-w-container mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8;
   }
   
   .section {
-    @apply py-20 lg:py-32;
+    @apply py-16 lg:py-24 space-y-12;
   }
   
   .section-compact {
-    @apply py-16 lg:py-24;
+    @apply py-12 lg:py-16 space-y-8;
+  }
+
+  /* Main content wrapper */
+  main {
+    @apply flex-1 container py-12;
   }
   
   .heading-1 {
-    @apply text-5xl lg:text-7xl font-bold text-secondary-900 leading-tight tracking-tight;
+    @apply text-4xl lg:text-6xl font-bold text-gray-900 dark:text-gray-100 leading-tight tracking-tight;
   }
   
   .heading-2 {
-    @apply text-4xl lg:text-6xl font-bold text-secondary-900 leading-tight tracking-tight;
+    @apply text-3xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 leading-tight tracking-tight;
   }
   
   .heading-3 {
-    @apply text-2xl lg:text-4xl font-bold text-secondary-900 leading-tight;
+    @apply text-2xl lg:text-3xl font-semibold text-gray-900 dark:text-gray-100 leading-tight;
   }
   
   .heading-4 {
-    @apply text-xl lg:text-2xl font-semibold text-secondary-900 leading-tight;
+    @apply text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100 leading-tight;
   }
   
   .text-large {
-    @apply text-xl lg:text-2xl text-secondary-700 leading-relaxed;
+    @apply text-lg lg:text-xl text-gray-700 dark:text-gray-300 leading-relaxed;
   }
   
   .text-body {
-    @apply text-lg text-secondary-600 leading-relaxed;
+    @apply text-base lg:text-lg text-gray-600 dark:text-gray-400 leading-relaxed;
   }
   
   .text-small {
-    @apply text-base text-secondary-600 leading-relaxed;
+    @apply text-sm lg:text-base text-gray-600 dark:text-gray-400 leading-relaxed;
   }
 
   /* Modern Badge Component */
@@ -104,19 +132,19 @@
   }
   
   .badge-primary {
-    @apply badge bg-primary-100 text-primary-800;
+    @apply badge bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300;
   }
   
   .badge-success {
-    @apply badge bg-green-100 text-green-800;
+    @apply badge bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300;
   }
   
   .badge-warning {
-    @apply badge bg-yellow-100 text-yellow-800;
+    @apply badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300;
   }
   
   .badge-info {
-    @apply badge bg-blue-100 text-blue-800;
+    @apply badge bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300;
   }
 
   /* Progress Bar */
@@ -139,15 +167,28 @@
 
   /* Icon Container */
   .icon-container {
-    @apply w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300;
+    @apply w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 aspect-square;
   }
   
   .icon-container-primary {
-    @apply icon-container bg-primary-100 text-primary-600 hover:bg-primary-200;
+    @apply icon-container bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 hover:bg-primary-200 dark:hover:bg-primary-800/50;
   }
   
   .icon-container-accent {
-    @apply icon-container bg-accent-100 text-accent-600 hover:bg-accent-200;
+    @apply icon-container bg-accent-100 dark:bg-accent-900/30 text-accent-600 dark:text-accent-400 hover:bg-accent-200 dark:hover:bg-accent-800/50;
+  }
+
+  /* Responsive icon sizing */
+  .icon-sm {
+    @apply w-6 h-6 md:w-7 md:h-7;
+  }
+
+  .icon-md {
+    @apply w-8 h-8 md:w-10 md:h-10;
+  }
+
+  .icon-lg {
+    @apply w-10 h-10 md:w-12 md:h-12;
   }
 }
 
@@ -197,13 +238,28 @@
     @apply max-w-full h-auto;
   }
 
-  /* Better link styles */
-  a:not(.btn):not(.btn-primary):not(.btn-secondary):not(.btn-accent) {
-    @apply transition-colors duration-300;
+  /* Ensure all images have alt attributes for accessibility */
+  img:not([alt]) {
+    @apply border-2 border-red-500;
   }
 
-  a:not(.btn):not(.btn-primary):not(.btn-secondary):not(.btn-accent):hover {
-    @apply text-primary;
+  img:not([alt])::after {
+    content: "Missing alt attribute";
+    @apply text-red-500 text-xs;
+  }
+
+  /* Better link styles */
+  a:not(.btn):not(.btn-primary):not(.btn-secondary):not(.btn-accent):not(.btn-ghost) {
+    @apply transition-colors duration-300 underline-offset-4 hover:underline;
+  }
+
+  a:not(.btn):not(.btn-primary):not(.btn-secondary):not(.btn-accent):not(.btn-ghost):hover {
+    @apply text-primary dark:text-primary-400;
+  }
+
+  /* Skip link for accessibility */
+  .skip-link {
+    @apply absolute -top-10 left-4 bg-primary text-white px-4 py-2 rounded-md z-50 focus:top-4 transition-all duration-300;
   }
 
   /* Focus styles for accessibility */

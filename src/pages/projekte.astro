@@ -110,7 +110,7 @@ const projects = [
   description="Erfolgreiche IT-Projekte und Transformationen - Entdecken Sie unsere Referenzen in verschiedenen Branchen und Technologiebereichen."
 >
   <Header />
-  <main class="pt-20 lg:pt-24">
+  <main class="pt-20 lg:pt-24" role="main" id="main-content">
     <!-- Hero Section -->
     <section class="section bg-gradient-to-br from-primary-50 via-white to-accent-50 relative overflow-hidden">
       <!-- Background Elements -->
@@ -174,9 +174,9 @@ const projects = [
     </section>
 
     <!-- Projects Section -->
-    <section class="section-compact bg-white">
+    <section class="section-compact bg-surface dark:bg-gray-900" aria-label="Unsere Projekte">
       <div class="container">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="grid gap-8 grid-cols-[repeat(auto-fit,minmax(320px,1fr))]">
           {projects.map((project, index) => (
             <ProjectCard 
               key={project.title}
