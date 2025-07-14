@@ -57,7 +57,7 @@ const ServicesPreview = () => {
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              className="card group hover:scale-105"
+              className="card group hover:scale-105 hover:shadow-xl"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}

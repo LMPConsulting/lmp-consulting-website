@@ -16,13 +16,13 @@ const navItems = [
   <nav class="container" aria-label="Hauptnavigation">
     <div class="flex items-center justify-between h-16 lg:h-20">
       <!-- Logo -->
-      <a href="/" class="flex items-center space-x-2 group" aria-label="LMP Consulting - Startseite">
-        <div class="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-primary rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-          <span class="text-white font-bold text-lg lg:text-xl">L</span>
+      <a href="/" class="flex items-center space-x-3 group" aria-label="LMP Consulting - Startseite">
+        <div class="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-soft">
+          <span class="text-white font-bold text-lg">L</span>
         </div>
         <div class="hidden sm:block">
-          <div class="text-lg lg:text-xl font-bold text-secondary-900">LMP Consulting</div>
-          <div class="text-xs lg:text-sm text-secondary-600">GmbH</div>
+          <div class="text-xl font-bold text-secondary-900 group-hover:text-primary transition-colors duration-300">LMP Consulting</div>
+          <div class="text-sm text-secondary-600">GmbH</div>
         </div>
       </a>
 
@@ -31,10 +31,10 @@ const navItems = [
         {navItems.map((item) => (
           <a
             href={item.href}
-            class={`text-sm font-medium transition-colors duration-300 hover:text-primary relative ${
+            class={`text-sm font-semibold transition-all duration-300 hover:text-primary relative py-2 px-1 ${
               currentPath === item.href 
                 ? 'text-primary' 
-                : 'text-secondary-700'
+                : 'text-secondary-700 hover:scale-105'
             }`}
             aria-current={currentPath === item.href ? 'page' : undefined}
           >
