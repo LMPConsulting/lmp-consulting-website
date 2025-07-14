@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
 interface ServiceCardProps {
-  icon: React.ReactNode;
+  icon: string;
   title: string;
   description: string;
   features: string[];
@@ -38,7 +38,7 @@ const ServiceCard = ({
       {/* Icon */}
       <div className="relative z-10 mb-6">
         <div className="icon-container-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-lg">
-          {icon}
+          <span className="text-2xl">{icon}</span>
         </div>
       </div>
 
