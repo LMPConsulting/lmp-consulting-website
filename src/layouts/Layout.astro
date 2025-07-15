@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 export interface Props {
   title: string;
   description?: string;
@@ -107,9 +109,5 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       });
     </script>
     
-    <!-- Global styles -->
-    <style>
-      @import "../styles/global.css";
-    </style>
   </body>
 </html>
