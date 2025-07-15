@@ -9,8 +9,8 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-accent-50 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-accent-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute top-40 right-10 w-72 h-72 bg-yellow-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
         <div className="absolute -bottom-8 left-20 w-72 h-72 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
       </div>
 
@@ -120,7 +120,7 @@ const Hero = () => {
                 </motion.div>
 
                 <motion.div 
-                  className="absolute bottom-12 left-4 w-14 h-14 bg-primary-100 rounded-lg shadow-soft flex items-center justify-center"
+                  className="absolute bottom-12 left-4 w-14 h-14 bg-blue-100 rounded-lg shadow-soft flex items-center justify-center"
                   animate={{ y: [0, -8, 0] }}
                   transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                 >

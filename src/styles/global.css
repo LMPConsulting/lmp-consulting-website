@@ -133,7 +133,7 @@
   }
   
   .badge-primary {
-    @apply badge bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300;
+    @apply badge bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300;
   }
   
   .badge-success {
@@ -172,11 +172,11 @@
   }
   
   .icon-container-primary {
-    @apply icon-container bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 hover:bg-primary-200 dark:hover:bg-primary-800/50;
+    @apply icon-container bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-800/50;
   }
   
   .icon-container-accent {
-    @apply icon-container bg-accent-100 dark:bg-accent-900/30 text-accent-600 dark:text-accent-400 hover:bg-accent-200 dark:hover:bg-accent-800/50;
+    @apply icon-container bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 hover:bg-yellow-200 dark:hover:bg-yellow-800/50;
   }
 
   /* Responsive icon sizing */
