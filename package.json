@@ -22,6 +22,7 @@
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "astro": "^4.2.1",
+    "clsx": "^2.1.0",
     "framer-motion": "^10.18.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -33,6 +34,8 @@
   "devDependencies": {
     "@playwright/test": "^1.40.1",
     "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@testing-library/jest-dom": "^6.2.0",
     "@testing-library/react": "^14.1.2",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
@@ -46,6 +49,7 @@
     "lucide-react": "^0.525.0",
     "prettier": "^3.1.1",
     "prettier-plugin-astro": "^0.12.3",
+    "prettier-plugin-tailwindcss": "^0.5.11",
     "typescript": "^5.3.3",
     "vitest": "^1.1.3"
   }
