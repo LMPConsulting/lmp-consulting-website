@@ -71,6 +71,7 @@ export default {
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
+          50: "#FAFAFA",
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {

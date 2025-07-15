@@ -16,7 +16,7 @@ const Section = forwardRef<HTMLElement, SectionProps>(
 
     const variantClasses = {
       default: 'bg-background',
-      muted: 'bg-muted/50',
+      muted: 'bg-gray-50 dark:bg-gray-900/50',
       accent: 'bg-gradient-to-br from-primary to-primary-700 text-primary-foreground'
     };
 
