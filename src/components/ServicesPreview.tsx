@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
 import Icon from './Icon';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/Card';
+import { Button } from './ui/Button';
 import { Lightbulb, ClipboardList, Users, Check } from 'lucide-react';
+import { fadeInUp, staggerContainer, cardHover } from '../lib/animations';
 
 const services = [
   {
@@ -43,35 +46,44 @@ const ServicesPreview = () => {
           </p>
         </motion.div>
 
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+        <motion.div 
+          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+        >
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              className="card group hover:scale-105 hover:shadow-xl"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
-              viewport={{ once: true }}
+              variants={fadeInUp}
+              whileHover={cardHover.hover}
+              className="h-full"
             >
-              <div className="mb-4 group-hover:scale-110 transition-transform duration-300">
-                <Icon icon={service.icon} size={32} className="w-8 h-8 md:w-10 md:h-10" />
-              </div>
-              
-              <h3 className="heading-3 mb-3">{service.title}</h3>
-              
-              <p className="text-body mb-6">{service.description}</p>
-              
-              <ul className="space-y-2">
-                {service.features.map((feature) => (
-                  <li key={feature} className="flex items-center text-sm text-secondary-600">
-                    <Icon icon={Check} size={16} className="w-4 h-4 text-primary mr-2 flex-shrink-0" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+              <Card className="h-full group hover:shadow-xl transition-all duration-300">
+                <CardHeader>
+                  <div className="mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <Icon icon={service.icon} size={32} className="w-8 h-8 md:w-10 md:h-10 text-primary" />
+                  </div>
+                  <CardTitle className="text-xl">{service.title}</CardTitle>
+                  <CardDescription className="text-base">
+                    {service.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    {service.features.map((feature) => (
+                      <li key={feature} className="flex items-center text-sm text-muted-foreground">
+                        <Icon icon={Check} size={16} className="w-4 h-4 text-primary mr-3 flex-shrink-0" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <motion.div
           className="text-center mt-12"
@@ -80,9 +92,11 @@ const ServicesPreview = () => {
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
           viewport={{ once: true }}
         >
-          <a href="/leistungen" className="btn-primary">
-            Alle Leistungen entdecken
-          </a>
+          <Button asChild size="lg">
+            <a href="/leistungen">
+              Alle Leistungen entdecken
+            </a>
+          </Button>
         </motion.div>
       </div>
     </section>

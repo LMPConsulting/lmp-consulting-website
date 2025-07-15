@@ -1,0 +1,122 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+}
+
+const { 
+  title, 
+  description = "LMP Consulting GmbH - IT-Beratung, Projektleitung und Change Management", 
+  image = "/og-image.jpg", 
+  noindex = false 
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Import Header and Footer
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+    <meta property="og:site_name" content="LMP Consulting GmbH" />
+    <meta property="og:locale" content="de_DE" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.url)} />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style" />
+    
+    <!-- JSON-LD Schema.org markup -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "LMP Consulting GmbH",
+        "url": "https://lmp-consulting.vercel.app",
+        "logo": "https://lmp-consulting.vercel.app/logo.svg",
+        "description": "IT-Beratung, Projektleitung und Change Management",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "CH"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "availableLanguage": ["German", "English"]
+        },
+        "sameAs": [
+          "https://linkedin.com/company/lmp-consulting",
+          "https://xing.com/companies/lmp-consulting"
+        ]
+      }
+    </script>
+  </head>
+  <body class="min-h-screen bg-background font-sans antialiased">
+    <!-- Standard Skip Link -->
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-primary text-primary-foreground px-4 py-2 rounded-md">
+      Skip to main content
+    </a>
+    
+    <!-- Standard Layout Structure -->
+    <div class="relative flex min-h-screen flex-col">
+      <Header />
+      <main id="main" class="flex-1">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+    
+    <!-- Page Transition Script -->
+    <script>
+      // Standard page transition functionality
+      document.addEventListener('DOMContentLoaded', () => {
+        const main = document.getElementById('main');
+        if (main) {
+          main.style.opacity = '0';
+          main.style.transform = 'translateY(20px)';
+          main.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+          
+          setTimeout(() => {
+            main.style.opacity = '1';
+            main.style.transform = 'translateY(0)';
+          }, 100);
+        }
+      });
+    </script>
+  </body>
+</html>

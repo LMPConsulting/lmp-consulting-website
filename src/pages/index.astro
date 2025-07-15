@@ -1,61 +1,62 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import StandardLayout from '../layouts/StandardLayout.astro';
 import Hero from '../components/Hero';
 import ServicesPreview from '../components/ServicesPreview';
+import { Button } from '../components/ui/Button';
 ---
 
-<Layout title="LMP Consulting GmbH - IT-Beratung, Projektleitung & Change Management">
-  <Header />
-  <main role="main" id="main-content">
+<StandardLayout title="LMP Consulting GmbH - IT-Beratung, Projektleitung & Change Management">
+  <div class="space-y-0">
     <Hero client:load />
     <ServicesPreview client:load />
     
     <!-- Stats Section -->
-    <section class="section bg-secondary-50">
-      <div class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-12">
+    <section class="py-16 lg:py-24 bg-muted/50">
+      <div class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-          <div class="animate-fade-in">
-            <div class="text-4xl lg:text-5xl font-bold text-primary mb-2">15+</div>
-            <div class="text-secondary-600">Jahre Erfahrung</div>
+          <div class="space-y-2">
+            <div class="text-4xl lg:text-5xl font-bold text-primary">15+</div>
+            <div class="text-muted-foreground">Jahre Erfahrung</div>
           </div>
-          <div class="animate-fade-in" style="animation-delay: 0.1s;">
-            <div class="text-4xl lg:text-5xl font-bold text-primary mb-2">50+</div>
-            <div class="text-secondary-600">Erfolgreiche Projekte</div>
+          <div class="space-y-2">
+            <div class="text-4xl lg:text-5xl font-bold text-primary">50+</div>
+            <div class="text-muted-foreground">Erfolgreiche Projekte</div>
           </div>
-          <div class="animate-fade-in" style="animation-delay: 0.2s;">
-            <div class="text-4xl lg:text-5xl font-bold text-primary mb-2">100%</div>
-            <div class="text-secondary-600">Kundenzufriedenheit</div>
+          <div class="space-y-2">
+            <div class="text-4xl lg:text-5xl font-bold text-primary">100%</div>
+            <div class="text-muted-foreground">Kundenzufriedenheit</div>
           </div>
-          <div class="animate-fade-in" style="animation-delay: 0.3s;">
-            <div class="text-4xl lg:text-5xl font-bold text-primary mb-2">24/7</div>
-            <div class="text-secondary-600">Support</div>
+          <div class="space-y-2">
+            <div class="text-4xl lg:text-5xl font-bold text-primary">24/7</div>
+            <div class="text-muted-foreground">Support</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="section bg-gradient-primary text-white">
-      <div class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-12 text-center">
-        <h2 class="heading-2 mb-4 text-white">
+    <section class="py-16 lg:py-24 bg-gradient-to-br from-primary to-primary-700 text-primary-foreground">
+      <div class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl lg:text-5xl font-bold mb-6">
           Bereit für Ihre digitale Transformation?
         </h2>
-        <p class="text-large mb-8 text-white/90 max-w-2xl mx-auto">
+        <p class="text-lg lg:text-xl mb-8 text-primary-foreground/90 max-w-2xl mx-auto">
           Lassen Sie uns gemeinsam Ihre IT-Herausforderungen analysieren und 
           maßgeschneiderte Lösungen entwickeln.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/kontakt" class="btn bg-white text-primary hover:bg-secondary-100">
-            Kostenlose Erstberatung
-          </a>
-          <a href="/projekte" class="btn border-2 border-white text-white hover:bg-white hover:text-primary">
-            Referenzen ansehen
-          </a>
+          <Button asChild size="lg" variant="secondary">
+            <a href="/kontakt">
+              Kostenlose Erstberatung
+            </a>
+          </Button>
+          <Button asChild size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+            <a href="/projekte">
+              Referenzen ansehen
+            </a>
+          </Button>
         </div>
       </div>
     </section>
-  </main>
-  <Footer />
-</Layout>
+  </div>
+</StandardLayout>

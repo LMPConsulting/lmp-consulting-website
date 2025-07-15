@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import Icon from './Icon';
+import { Button } from './ui/Button';
 import { ArrowRight, CheckCircle, Zap, ClipboardCheck, Users2 } from 'lucide-react';
+import { fadeInUp, slideInLeft, slideInRight, staggerContainer } from '../lib/animations';
 
 const Hero = () => {
   return (
@@ -17,15 +19,12 @@ const Hero = () => {
           {/* Content */}
           <motion.div
             className="text-center lg:text-left"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            {...slideInLeft}
           >
             <motion.h1 
-              className="heading-1 mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+              className="text-4xl lg:text-6xl font-bold text-foreground leading-tight tracking-tight mb-6"
+              {...fadeInUp}
+              transition={{ ...fadeInUp.transition, delay: 0.2 }}
             >
               Ihre digitale{' '}
               <span className="text-gradient">Transformation</span>{' '}
@@ -33,10 +32,9 @@ const Hero = () => {
             </motion.h1>
             
             <motion.p 
-              className="text-large mb-8 max-w-2xl mx-auto lg:mx-0"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+              className="text-lg lg:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto lg:mx-0"
+              {...fadeInUp}
+              transition={{ ...fadeInUp.transition, delay: 0.4 }}
             >
               Mit über 15 Jahren Erfahrung begleiten wir Unternehmen bei der 
               strategischen IT-Beratung, professionellem Projektmanagement und 
@@ -49,18 +47,22 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
             >
-              <a href="/kontakt" className="btn-primary group">
-                Kostenlose Beratung
-                <Icon icon={ArrowRight} size={20} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-              </a>
-              <a href="/leistungen" className="btn-secondary">
-                Unsere Leistungen
-              </a>
+              <Button asChild size="lg" className="group">
+                <a href="/kontakt">
+                  Kostenlose Beratung
+                  <Icon icon={ArrowRight} size={20} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <a href="/leistungen">
+                  Unsere Leistungen
+                </a>
+              </Button>
             </motion.div>
 
             {/* Trust Indicators */}
             <motion.div 
-              className="mt-12 flex flex-wrap items-center justify-center lg:justify-start gap-8 text-sm text-secondary-600"
+              className="mt-12 flex flex-wrap items-center justify-center lg:justify-start gap-8 text-sm text-muted-foreground"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }}
