@@ -79,7 +79,7 @@
   }
   
   .card-feature {
-    @apply card bg-gradient-to-br from-surface to-gray-50 dark:from-gray-800 dark:to-gray-700 hover:from-primary-50 hover:to-accent-50 dark:hover:from-gray-700 dark:hover:to-gray-600;
+    @apply card bg-gradient-to-br from-surface to-gray-50 dark:from-gray-800 dark:to-gray-700 hover:from-primary-50 hover:to-yellow-50 dark:hover:from-gray-700 dark:hover:to-gray-600;
   }
   
   .container {
