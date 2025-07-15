@@ -168,7 +168,7 @@
 
   /* Icon Container */
   .icon-container {
-    @apply w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 aspect-square;
+    @apply w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300;
   }
   
   .icon-container-primary {
