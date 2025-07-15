@@ -9,7 +9,7 @@ interface Props {
 export default function Icon({ icon: IconCmp, className = "", size = 28 }: Props) {
   return (
     <IconCmp 
-      className={`shrink-0 text-primary dark:text-primary-400 ${className}`} 
+      className={`shrink-0 text-primary dark:text-primary-400 aspect-square ${className}`} 
       size={size} 
       strokeWidth={1.8}
       aria-hidden="true"

@@ -82,8 +82,30 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
     <div class="flex flex-col min-h-screen">
-      <slot />
+      <div id="page-transition-wrapper">
+        <slot />
+      </div>
     </div>
+    
+    <!-- Page Transition Script -->
+    <script>
+      import { AnimatePresence } from 'framer-motion';
+      
+      // Add page transition functionality
+      document.addEventListener('DOMContentLoaded', () => {
+        const wrapper = document.getElementById('page-transition-wrapper');
+        if (wrapper) {
+          wrapper.style.opacity = '0';
+          wrapper.style.transform = 'translateY(20px)';
+          wrapper.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+          
+          setTimeout(() => {
+            wrapper.style.opacity = '1';
+            wrapper.style.transform = 'translateY(0)';
+          }, 100);
+        }
+      });
+    </script>
     
     <!-- Global styles -->
     <style>
