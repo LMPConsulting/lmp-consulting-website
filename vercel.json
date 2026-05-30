@@ -1,0 +1,20 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "geolocation=(), microphone=(), camera=()" }
+      ]
+    }
+  ],
+  "redirects": [
+    { "source": "/leistungen", "destination": "/#leistungen", "permanent": false },
+    { "source": "/projekte",   "destination": "/",            "permanent": false },
+    { "source": "/profil",     "destination": "/",            "permanent": false },
+    { "source": "/kontakt",    "destination": "/#kontakt",    "permanent": false }
+  ]
+}
