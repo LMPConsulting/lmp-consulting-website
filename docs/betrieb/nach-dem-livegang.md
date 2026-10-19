@@ -2,7 +2,10 @@
 
 Stand: 19.10.2026. Die neue Seite ist live, alle 30 Live-Prüfungen (`bash tools/check_live.sh`) bestehen.
 
-## 1. Vercel aufräumen (empfohlen)
+**Erledigt am 19.10.2026:** beide Vercel-Projekte gelöscht (alle `*.vercel.app`-Kopien liefern 404),
+SPF- und DMARC-Einträge in Netlify DNS angelegt und per DNS-Abfrage geprüft. Die Abschnitte unten bleiben als Referenz.
+
+## 1. Vercel aufräumen (erledigt)
 
 Das GitHub-Repo ist noch mit zwei Vercel-Projekten verbunden. Sie veröffentlichen bei jedem Push eine Kopie der Seite
 unter `*.vercel.app`. Die echte Domain läuft über Netlify, Vercel wird nicht mehr gebraucht.
@@ -13,7 +16,7 @@ unter `*.vercel.app`. Die echte Domain läuft über Netlify, Vercel wird nicht m
 
 Danach sind die Kopien offline und bei Pushes laufen keine Vercel-Builds mehr.
 
-## 2. E-Mail-Fälschung im Namen der Domain verhindern (optional, kostenlos)
+## 2. E-Mail-Fälschung im Namen der Domain verhindern (erledigt)
 
 Die Domain `lmpconsulting.de` verschickt keine Mails. Diese Einträge sagen allen Mailservern:
 „Mails von @lmpconsulting.de sind immer gefälscht, bitte ablehnen.“ Die web.de-Adresse ist davon nicht betroffen.
@@ -26,7 +29,7 @@ Die Domain `lmpconsulting.de` verschickt keine Mails. Diese Einträge sagen alle
 | TXT | `@` (oder leer lassen) | `v=spf1 -all` |
 | TXT | `_dmarc` | `v=DMARC1; p=reject; adkim=s; aspf=s` |
 
-3. Kurz Bescheid geben, dann prüfe ich die Einträge.
+3. Prüfen: `nslookup -type=TXT lmpconsulting.de` und `nslookup -type=TXT _dmarc.lmpconsulting.de`.
 
 Falls später doch ein Postfach `@lmpconsulting.de` eingerichtet wird, müssen diese Einträge durch die des Mail-Anbieters ersetzt werden.
 
