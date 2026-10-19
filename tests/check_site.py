@@ -129,8 +129,8 @@ def pruefe_seiten() -> None:
             if len(roh.split("<title>")[1].split("</title>")[0]) > 60:
                 fail("index.html: Titel länger als 60 Zeichen")
             # Erfahrung: Wolken statt Zuordnung Branche -> Projekt, keine Detail-Fakten, kein Telefon
-            if "tel:" in roh or "+49 1573" in text or '"telephone"' in roh:
-                fail("index.html: Telefonnummer soll auf der Startseite nicht erscheinen")
+            if "tel:" in roh or "+49 1573" in text or '"telephone"' in roh or "Anruf" in text:
+                fail("index.html: Telefon/Anruf soll auf der Startseite nicht erscheinen (nur Mail)")
             for weg in ("Zertifizierung", "PRINCE2", "Methoden"):
                 if weg in text:
                     fail(f"index.html: „{weg}“ soll entfernt sein")
