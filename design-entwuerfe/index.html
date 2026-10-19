@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Designentwürfe LMP</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..700&display=swap">
+<style>
+:root { --bg: #ffffff; --text: #22282c; --grau: #5f666b; --linie: #dde0e2; --flaeche: #f3f4f4; --link: #1d4ed8; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 17px/1.6 "Schibsted Grotesk", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 56px 20px 96px; }
+h1 { font-size: clamp(32px, 4.5vw, 52px); line-height: 1.05; letter-spacing: -.025em; font-weight: 600; margin: 0 0 16px; }
+h2 { font-size: 30px; letter-spacing: -.02em; line-height: 1.15; font-weight: 600; margin: 0 0 8px; }
+h3 { font-size: 18px; margin: 24px 0 6px; font-weight: 600; }
+p { max-width: 42em; margin: 0 0 1em; }
+a { color: var(--link); text-underline-offset: 4px; }
+.intro { color: var(--grau); font-size: 19px; max-width: 40em; }
+.richtung { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 40px; padding: 48px 0; border-top: 1px solid var(--linie); }
+.richtung:first-of-type { margin-top: 40px; }
+.vorschau { display: block; aspect-ratio: 16 / 10; border: 1px solid var(--linie); overflow: hidden; position: relative; background: var(--flaeche); }
+.vorschau iframe { width: 1440px; height: 900px; border: 0; transform-origin: 0 0; pointer-events: none; position: absolute; top: 0; left: 0; }
+.oeffnen { display: inline-block; margin-top: 12px; font-weight: 600; }
+dl { display: grid; grid-template-columns: 9em minmax(0, 1fr); gap: 6px 16px; margin: 16px 0 0; font-size: 16px; }
+dt { color: var(--grau); }
+dd { margin: 0; }
+.farben { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.farben span { width: 22px; height: 22px; border: 1px solid rgba(0,0,0,.12); display: inline-block; }
+ul { padding-left: 1.2em; margin: 0; }
+li { margin: 2px 0; }
+.empfehlung { background: var(--flaeche); padding: 28px 32px; margin-top: 8px; }
+.empfehlung h2 { font-size: 24px; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; margin-top: 16px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px 10px 0; border-top: 1px solid var(--linie); }
+th { color: var(--grau); font-weight: 500; }
+@media (max-width: 860px) { .richtung { grid-template-columns: 1fr; } dl { grid-template-columns: 1fr; } dt { margin-top: 8px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Drei Richtungen für lmpconsulting.de</h1>
+  <p class="intro" style="color:var(--text)"><strong>Neu: <a href="a2-roter-faden.html">Entwurf A2</a></strong> ist die überarbeitete Fassung von A, mit Wir-Texten, drei Schwerpunkten, Branchen statt Profilfoto und einem Umschalter für den Hintergrundton.</p>
+  <p class="intro">Alle drei Entwürfe nutzen dieselben Inhalte und denselben Aufbau, damit Sie nur das Design vergleichen. Jede Richtung hat genau ein auffälliges Element. Alles andere bleibt ruhig. Die Vorschauen lassen sich anklicken und vollständig ansehen, auch auf dem Handy.</p>
+
+  <section class="richtung">
+    <div>
+      <a class="vorschau" href="a-roter-faden.html" aria-label="Entwurf A öffnen"><iframe src="a-roter-faden.html" title="Vorschau Entwurf A" loading="lazy" tabindex="-1"></iframe></a>
+      <a class="oeffnen" href="a-roter-faden.html">Entwurf A öffnen</a>
+    </div>
+    <div>
+      <h2>A · Roter Faden</h2>
+      <p>Ein roter Faden liegt im Hero als Knäuel. Beim Scrollen zieht er sich durch die ganze Seite, läuft durch die vier Schritte des Vorgehens und endet als Unterstreichung unter Ihrer Mailadresse. Die Redewendung beschreibt, was gutes Projektmanagement leistet. Der Rest der Seite ist weiß, schlicht und typografisch.</p>
+      <dl>
+        <dt>Blickfang</dt><dd>Knäuel, das sich beim Scrollen zu einer Linie entwirrt</dd>
+        <dt>Farben</dt><dd class="farben"><span style="background:#fff"></span><span style="background:#2b3236"></span><span style="background:#5f666b"></span><span style="background:#c8161d"></span> Weiß, Anthrazit (RAL 7016), Verkehrsrot (RAL 3020)</dd>
+        <dt>Schrift</dt><dd>Schibsted Grotesk (frei, OFL)</dd>
+        <dt>Wirkung</dt><dd>Schweizerisch, ruhig, sehr klar</dd>
+        <dt>Risiko</dt><dd>Lebt davon, dass der Faden nie über Text läuft. Das braucht Feinarbeit an jeder Bildschirmbreite.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="richtung">
+    <div>
+      <a class="vorschau" href="b-im-plan.html" aria-label="Entwurf B öffnen"><iframe src="b-im-plan.html" title="Vorschau Entwurf B" loading="lazy" tabindex="-1"></iframe></a>
+      <a class="oeffnen" href="b-im-plan.html">Entwurf B öffnen</a>
+    </div>
+    <div>
+      <h2>B · Im Plan</h2>
+      <p>Der Hero ist ein Projektplan. Die Headline steht in Gantt-Balken auf echten Kalenderwochen, und eine gelbe Linie markiert den heutigen Tag. Beim Laden werden die Balken einmal „eingeplant“. Die Seite spricht durchgehend die Sprache von Projekten: Arbeitspakete, Phasen, nächster Meilenstein.</p>
+      <dl>
+        <dt>Blickfang</dt><dd>Typografischer Gantt-Plan mit Live-Kalenderwoche und „Heute“-Linie</dd>
+        <dt>Farben</dt><dd class="farben"><span style="background:#eef0f2"></span><span style="background:#172230"></span><span style="background:#5a6573"></span><span style="background:#f7b500"></span> Planpapier-Grau, Plotter-Tinte, Verkehrsgelb (RAL 1023)</dd>
+        <dt>Schrift</dt><dd>Archivo mit variabler Breite (frei, OFL)</dd>
+        <dt>Wirkung</dt><dd>Technisch, präzise, sofort als Projektmanagement erkennbar</dd>
+        <dt>Risiko</dt><dd>Am nächsten an „Werkzeug“ als an „Beratung“. Wirkt eher nüchtern als persönlich.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="richtung">
+    <div>
+      <a class="vorschau" href="c-persoenlich.html" aria-label="Entwurf C öffnen"><iframe src="c-persoenlich.html" title="Vorschau Entwurf C" loading="lazy" tabindex="-1"></iframe></a>
+      <a class="oeffnen" href="c-persoenlich.html">Entwurf C öffnen</a>
+    </div>
+    <div>
+      <h2>C · Persönlich</h2>
+      <p>Die Person steht im Mittelpunkt. Ein großes Porträt, Ich-Form und konkrete Beispiele, mit welchen Problemen Kunden typischerweise kommen. Beim Laden stehen die Buchstaben der Headline in gemischten Breiten und Stärken und ordnen sich dann zu einem ruhigen Satz. Das ist die Aussage „Ich bringe Ordnung“ als Bewegung.</p>
+      <dl>
+        <dt>Blickfang</dt><dd>Headline, die sich beim Laden selbst ordnet</dd>
+        <dt>Farben</dt><dd class="farben"><span style="background:#173b30"></span><span style="background:#eef1ed"></span><span style="background:#b9d2c2"></span><span style="background:#13221c"></span> Tannengrün statt IT-Navy, Nebelweiß, Salbei</dd>
+        <dt>Schrift</dt><dd>Mona Sans mit variabler Breite und Stärke (frei, OFL)</dd>
+        <dt>Wirkung</dt><dd>Boutique-Beratung, nahbar, hochwertig</dd>
+        <dt>Risiko</dt><dd>Braucht ein wirklich gutes Porträtfoto. Mit Stockfoto oder Handy-Selfie funktioniert es nicht.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="richtung" id="referenzen" style="display:block">
+    <h2>Worauf die Entwürfe aufbauen</h2>
+    <p>Die Recherche hat zwei Dinge geklärt: was gerade als hochwertig gilt und woran man KI-generierte Seiten erkennt.</p>
+    <h3>Was KI-Seiten verrät (und was die aktuelle Seite davon hat)</h3>
+    <ul>
+      <li>Cremefarbener Hintergrund mit Serife und Terrakotta-Akzent. Die aktuelle Seite nutzt #f4efe4 und #d9542b.</li>
+      <li>Ein einzelnes farbiges Wort in der Headline („Transformation“ in Blau).</li>
+      <li>Kleine Mono-Labels in Versalien über jeder Sektion, Meta-Zeilen mit Mittelpunkten.</li>
+      <li>Nummerierungen wie 01/02/03 bei Dingen ohne Reihenfolge.</li>
+      <li>Gleiche Karten mit gleichem Radius und weichem Schatten, Pfeile an jedem Button.</li>
+      <li>Viele gleichzeitige Endlos-Animationen statt eines bewussten Moments.</li>
+      <li>Keine Person, keine konkreten Projekte, nur allgemeine Aussagen.</li>
+    </ul>
+    <p style="margin-top:12px">Quellen: <a href="https://www.adriankrebs.ch/blog/design-slop/">Adrian Krebs, Analyse von 1.590 Seiten (2026)</a>, <a href="https://capitalandcompute.net/blog/fix-ai-slop-design/">Capital &amp; Compute</a>, <a href="https://impeccable.style/slop">impeccable.style</a>, <a href="https://www.creativebloq.com/ai/everything-looks-the-same-now-what">Creative Bloq</a>.</p>
+
+    <h3>Was 2025/2026 trägt</h3>
+    <ul>
+      <li>Typografie als Hauptbild, variable Schriften, sparsam eingesetzt (<a href="https://www.figma.com/resource-library/web-design-trends/">Figma</a>).</li>
+      <li>Ein eigener, „proprietärer“ visueller Effekt statt Baukasten-Effekten (<a href="https://webflow.com/blog/web-design-trends-2026">Webflow 2026</a>).</li>
+      <li>Menschliche, analoge Spuren und echte Fotos statt KI-Illustrationen (<a href="https://www.adobe.com/express/learn/blog/graphic-design-trends-2026">Adobe</a>).</li>
+      <li>Schlank, schnell, barrierearm.</li>
+      <li>Im IT-Umfeld sehen viele Seiten gleich aus: Navy, Elektroblau, Netzwerk-Grafiken. Wer sich abheben will, meidet genau das.</li>
+    </ul>
+
+    <h3>Referenzseiten</h3>
+    <div id="referenz-tabelle">
+      <p>Alle Seiten wurden am 19.10.2026 live geprüft. Übernommen wird jeweils eine Idee, nichts davon wird kopiert.</p>
+      <table>
+        <thead><tr><th>Seite</th><th>Was sie besonders macht</th><th>Was LMP daraus nimmt</th><th>Passt zu</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://www.projectsbyif.com">Projects by IF</a>, London</td><td>Eine einzige durchgehende Linie als Muster, eine Farbfläche, Ergebnisse als große Zahlen</td><td>Eine Linie als Markenzeichen, Projektergebnisse als Zahlen statt Logos</td><td>A</td></tr>
+          <tr><td><a href="https://www.officekgdvs.com">Office KGDVS</a>, Brüssel</td><td>Feine Strichzeichnungen neben Fotos, Projekte nur mit Nummer beschriftet</td><td>Leistungen als schlichte Strichzeichnung (Prozess, Phasenplan)</td><td>A</td></tr>
+          <tr><td><a href="https://stripepartners.com">Stripe Partners</a>, London</td><td>Weiße Seite, eine reine Farbe, Navigation als Leiste am unteren Rand</td><td>Weiß plus genau eine Farbe; Leiste unten als Statuszeile („KW 43“)</td><td>A, B</td></tr>
+          <tr><td><a href="https://www.diffferent.de/en">diffferent</a>, Berlin</td><td>Headline über das Raster verteilt, letzte Zeile springt an den rechten Rand</td><td>Headline bewusst ins Raster setzen statt zentrieren</td><td>A, C</td></tr>
+          <tr><td><a href="https://nand.io">Studio NAND</a>, Berlin</td><td>Ein einziger Absatz, nur Schlüsselwörter in einer Farbe</td><td>Akzentfarbe nur dort, wo sie etwas bedeutet</td><td>A</td></tr>
+          <tr><td><a href="https://nitor.com/en">Nitor</a>, Helsinki</td><td>Leistungen als große, nummerierte Phasen</td><td>Vorgehen als echte Abfolge darstellen</td><td>B</td></tr>
+          <tr><td><a href="https://teenage.engineering">Teenage Engineering</a>, Stockholm</td><td>Navigation mit kleinen Piktogrammen wie im Handbuch</td><td>Kleine Diagramme (Balken, Pfeil, Knoten) als Zeichen</td><td>B</td></tr>
+          <tr><td><a href="https://oxide.computer">Oxide</a></td><td>Zeigt echte Produktoberflächen statt Stockbildern</td><td>Ein echtes, anonymisiertes Artefakt zeigen, z. B. einen Projektplan</td><td>B</td></tr>
+          <tr><td><a href="https://www.bekk.no">Bekk</a>, Oslo</td><td>Eine einzige Signalfarbe, genau einmal eingesetzt</td><td>Gelb nur für „Heute“ und Meilensteine</td><td>B</td></tr>
+          <tr><td><a href="https://frankchimero.com">Frank Chimero</a></td><td>Ein-Personen-Seite, nur ein kurzer Index auf dunklem Graugrün</td><td>Selbstbewusstsein durch Weglassen</td><td>C</td></tr>
+          <tr><td><a href="https://www.reaktor.com">Reaktor</a>, Helsinki</td><td>Bilder in einen Buchstaben der Marke geschnitten</td><td>Porträt in einer Form der Marke rahmen</td><td>C</td></tr>
+          <tr><td><a href="https://normally.com">Normally</a>, London</td><td>Headline in zwei Tönen, Mailadresse groß am Seitenende</td><td>Text trägt den Hero, Kontakt als großer Abschluss</td><td>C</td></tr>
+          <tr><td><a href="https://implementconsultinggroup.com">Implement</a>, Kopenhagen</td><td>Wortmarke verwandelt sich beim Scrollen</td><td>Nur die Mechanik, nicht die Creme-Optik</td><td>C</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:16px">Bewusst aussortiert: Seiten mit Kartenrastern, Partikel-Wellen oder Creme-mit-Serife-Optik, weil genau das den KI-Eindruck erzeugt.</p>
+    </div>
+  </section>
+
+  <section class="empfehlung">
+    <h2>Meine Empfehlung</h2>
+    <p><strong>Entwurf A als Gestaltung, kombiniert mit den Inhalten aus C.</strong> Der rote Faden ist die eigenständigste Idee. Er kommt aus der deutschen Sprache und beschreibt genau, was Projektmanagement leistet. So etwas erzeugt kein Baukasten. Das weiße, ruhige Grundlayout wirkt im Konzern genauso seriös wie im Mittelstand.</p>
+    <p>Aus C würde ich übernehmen: ein echtes Porträt, „Typisch“-Beispiele pro Leistung und eine klare Stimme, entweder Ich oder Wir. Diese Spezifität ist der wichtigste Schutz gegen den KI-Eindruck, wichtiger als jede Farbe oder Schrift.</p>
+    <p>B ist die präziseste Richtung, wirkt aber eher wie ein Werkzeug als wie eine Beratung. Wenn Ihnen die Live-Kalenderwoche gefällt, kann sie als kleines Detail in A oder C auftauchen, zum Beispiel im Kontaktbereich.</p>
+  </section>
+</div>
+<script>
+// Vorschauen auf Kachelbreite skalieren
+function skalieren() {
+  document.querySelectorAll('.vorschau').forEach((v) => {
+    const f = v.querySelector('iframe');
+    f.style.transform = 'scale(' + (v.clientWidth / 1440) + ')';
+  });
+}
+addEventListener('resize', skalieren);
+skalieren();
+</script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Entwurf B · Im Plan — LMP Consulting</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#eef0f2">
+<!-- Entwurf: Schrift per Google-Fonts-CDN. Für die Live-Seite wird Archivo selbst gehostet (DSGVO). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&display=swap">
+<style>
+:root {
+  --planpapier: #eef0f2;
+  --weiss:      #fbfcfc;
+  --tinte:      #172230;   /* tiefes Blauschwarz, wie Plotter-Tinte */
+  --grau:       #5a6573;
+  --raster:     #d4d9df;
+  --gelb:       #f7b500;   /* angelehnt an RAL 1023 Verkehrsgelb: „heute“ und Meilensteine */
+
+  --schrift: "Archivo", "Arial Narrow", Arial, sans-serif;
+  --rand: clamp(16px, 4vw, 56px);
+  --maxw: 1320px;
+  --spalten: 8;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--planpapier);
+  color: var(--tinte);
+  font: 400 18px/1.6 var(--schrift);
+  font-variation-settings: "wdth" 100;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--tinte); outline-offset: 3px; box-shadow: 0 0 0 5px var(--gelb); }
+.skip { position: absolute; left: -9999px; top: 8px; background: var(--tinte); color: var(--weiss); padding: 10px 14px; z-index: 100; }
+.skip:focus { left: 8px; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--rand); }
+.schmal { font-variation-settings: "wdth" 75; }
+.tabellarisch { font-variant-numeric: tabular-nums; }
+
+/* ---------- Kopf ---------- */
+.kopf { display: flex; justify-content: space-between; align-items: center; padding-top: 22px; padding-bottom: 22px; }
+.marke { text-decoration: none; display: inline-flex; align-items: center; gap: 12px; font-weight: 700; font-size: 18px; font-variation-settings: "wdth" 112; letter-spacing: -.005em; }
+.marke svg { flex: none; }
+.nav { display: flex; gap: 28px; font-size: 16px; font-variation-settings: "wdth" 88; }
+.nav a { text-decoration: none; padding: 6px 0; color: var(--grau); }
+.nav a:hover { color: var(--tinte); text-decoration: underline; text-decoration-thickness: 2px; text-decoration-color: var(--gelb); text-underline-offset: 6px; }
+.menu-btn { display: none; }
+@media (max-width: 760px) {
+  .nav { display: none; }
+  .nav.offen { display: flex; flex-direction: column; gap: 4px; position: absolute; top: 70px; left: var(--rand); right: var(--rand); background: var(--weiss); border: 1px solid var(--raster); padding: 12px 18px; z-index: 20; }
+  .menu-btn { display: inline-block; font: 500 16px var(--schrift); background: var(--weiss); border: 1px solid var(--raster); border-radius: 2px; padding: 8px 14px; color: var(--tinte); }
+}
+
+/* ---------- Plan (Hero) ---------- */
+.plan {
+  position: relative;
+  margin-top: 8px;
+  border-top: 1px solid var(--raster);
+  background-image: linear-gradient(to right, var(--raster) 1px, transparent 1px);
+  background-size: calc(100% / var(--spalten)) 100%;
+  border-right: 1px solid var(--raster);
+}
+.wochen { display: grid; grid-template-columns: repeat(var(--spalten), minmax(0, 1fr)); font-size: 14px; color: var(--grau); }
+.wochen span { padding: 10px 10px 0; font-variation-settings: "wdth" 75; font-variant-numeric: tabular-nums; }
+.wochen span.jetzt { color: var(--tinte); font-weight: 600; }
+
+.balken { list-style: none; margin: 0; padding: clamp(36px, 6vw, 72px) 0 clamp(40px, 6vw, 80px); display: grid; gap: clamp(10px, 1.4vw, 18px); font-size: clamp(25px, 5.4vw, 80px); }
+.balken li { margin-left: calc(var(--start) * 100% / var(--spalten)); white-space: nowrap; }
+.balken .bar {
+  display: inline-block;
+  background: var(--tinte);
+  color: var(--weiss);
+  font-weight: 600;
+  font-variation-settings: "wdth" 104;
+  line-height: 1;
+  letter-spacing: -.025em;
+  padding: .14em .3em .18em;
+  white-space: nowrap;
+}
+.balken .meilenstein { display: inline-flex; align-items: center; gap: .3em; vertical-align: middle; margin-left: .25em; font-size: .38em; font-weight: 600; color: var(--tinte); font-variation-settings: "wdth" 88; letter-spacing: 0; }
+.balken .meilenstein::before { content: ""; width: .9em; height: .9em; background: var(--gelb); transform: rotate(45deg); }
+
+.heute { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--gelb); left: 0; z-index: 2; pointer-events: none; }
+.heute b { position: absolute; top: -1px; left: 0; transform: translateX(-50%) translateY(-100%); background: var(--gelb); color: var(--tinte); font-size: 13px; font-weight: 600; padding: 3px 8px; white-space: nowrap; font-variation-settings: "wdth" 85; }
+
+.hero-text { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 32px 64px; align-items: end; padding: clamp(32px, 5vw, 56px) 0 0; }
+.hero-text h1 { font-weight: 500; font-size: clamp(19px, 1.7vw, 23px); line-height: 1.45; margin: 0; max-width: 32em; font-variation-settings: "wdth" 100; }
+.hero-text h1 strong { font-weight: 700; }
+.aktionen { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: flex-end; }
+.btn { display: inline-block; background: var(--tinte); color: var(--weiss); text-decoration: none; font-weight: 600; font-size: 17px; padding: 16px 24px; border-radius: 2px; font-variation-settings: "wdth" 100; transition: background-color .2s ease, color .2s ease; }
+.btn:hover { background: var(--gelb); color: var(--tinte); }
+.textlink { font-weight: 600; text-decoration: underline; text-decoration-thickness: 2px; text-decoration-color: var(--raster); text-underline-offset: 6px; }
+.textlink:hover { text-decoration-color: var(--gelb); }
+@media (max-width: 860px) {
+  :root { --spalten: 6; }
+  .wochen span:nth-child(n+7) { display: none; }
+  .hero-text { grid-template-columns: 1fr; }
+  .aktionen { justify-content: flex-start; }
+}
+@media (max-width: 520px) {
+  :root { --spalten: 4; }
+  .wochen span:nth-child(n+5) { display: none; }
+  .balken li { margin-left: calc(var(--start-m) * 100% / var(--spalten)); }
+}
+
+/* Einmaliger Moment beim Laden: Balken werden „eingeplant“ */
+@media (prefers-reduced-motion: no-preference) {
+  .js .balken .bar { clip-path: inset(0 100% 0 0); animation: einplanen .7s cubic-bezier(.6,0,.2,1) forwards; animation-delay: calc(.25s + var(--i) * .32s); }
+  .js .balken .meilenstein { opacity: 0; animation: auftauchen .4s ease forwards; animation-delay: 1.55s; }
+  .js .heute { transform: scaleY(0); transform-origin: top; animation: linie .6s ease-out forwards; animation-delay: 1.7s; }
+  @keyframes einplanen { to { clip-path: inset(0 0 0 0); } }
+  @keyframes auftauchen { to { opacity: 1; } }
+  @keyframes linie { to { transform: scaleY(1); } }
+}
+
+/* ---------- Abschnitte ---------- */
+section { padding-top: clamp(80px, 11vw, 150px); }
+.abschnitt-kopf { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 5fr); gap: 24px 64px; align-items: end; margin-bottom: clamp(32px, 4vw, 56px); }
+h2 { font-weight: 600; font-size: clamp(32px, 4.2vw, 58px); line-height: 1.02; letter-spacing: -.025em; margin: 0; font-variation-settings: "wdth" 104; text-wrap: balance; }
+.abschnitt-kopf p { margin: 0; color: var(--grau); max-width: 34em; }
+h3 { font-weight: 600; font-size: 24px; line-height: 1.2; margin: 0 0 8px; font-variation-settings: "wdth" 100; letter-spacing: -.01em; }
+p { margin: 0 0 1em; max-width: 36em; }
+@media (max-width: 760px) { .abschnitt-kopf { grid-template-columns: 1fr; } }
+
+/* Arbeitspakete */
+.pakete { border-top: 2px solid var(--tinte); }
+.paket { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 5fr); gap: 12px 64px; padding: 28px 0 30px; border-bottom: 1px solid var(--raster); }
+.paket p { color: var(--grau); margin: 0; }
+.paket .aufgaben { margin: 12px 0 0; font-size: 16px; font-weight: 500; color: var(--tinte); }
+@media (max-width: 760px) { .paket { grid-template-columns: 1fr; } }
+
+/* Vorgehen als kleiner Plan */
+.phasen { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--tinte); }
+.phase { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 5fr); gap: 8px 64px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--raster); }
+.phase h3 { margin: 0; font-size: 21px; }
+.phase .spur { position: relative; height: 36px; background-image: linear-gradient(to right, var(--raster) 1px, transparent 1px); background-size: 12.5% 100%; }
+.phase .spur i { position: absolute; top: 6px; bottom: 6px; left: var(--von); width: var(--dauer); background: var(--tinte); }
+.phase p { grid-column: 2; margin: 0; color: var(--grau); font-size: 16px; }
+@media (max-width: 760px) { .phase { grid-template-columns: 1fr; } .phase p { grid-column: 1; } }
+
+/* Profil */
+.profil { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+.foto { aspect-ratio: 4 / 5; background: var(--weiss); border: 1px solid var(--raster); display: grid; place-items: center; color: var(--grau); font-size: 15px; text-align: center; }
+.profil .gross { font-size: clamp(21px, 2.1vw, 27px); line-height: 1.42; max-width: 26em; }
+.fakten { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: 32px 0 0; border-top: 2px solid var(--tinte); font-size: 16px; }
+.fakten div { padding: 12px 16px 0 0; }
+.fakten dt { color: var(--grau); font-size: 14px; font-variation-settings: "wdth" 85; }
+.fakten dd { margin: 0; font-weight: 600; }
+.platzhalter { background: #fff1b8; }
+@media (max-width: 860px) { .profil { grid-template-columns: 1fr; } .foto { max-width: 340px; } .fakten { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 16px; } }
+
+/* Kontakt */
+.kontakt { padding-bottom: clamp(80px, 10vw, 140px); }
+.naechster { display: flex; align-items: center; gap: 14px; font-size: 16px; font-weight: 600; font-variation-settings: "wdth" 85; margin-bottom: 18px; }
+.naechster::before { content: ""; width: 16px; height: 16px; background: var(--gelb); transform: rotate(45deg); }
+.mail { display: inline-block; font-weight: 600; font-size: clamp(28px, 5.6vw, 84px); letter-spacing: -.03em; line-height: 1.05; text-decoration: none; font-variation-settings: "wdth" 96; border-bottom: 3px solid var(--tinte); word-break: break-word; margin-top: 24px; }
+.mail:hover { border-bottom-color: var(--gelb); }
+.kontakt-zeilen { display: flex; flex-wrap: wrap; gap: 8px 48px; margin-top: 36px; font-size: 17px; }
+.kontakt-zeilen span { color: var(--grau); }
+
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; border-top: 1px solid var(--raster); padding-top: 22px; padding-bottom: 36px; font-size: 15px; color: var(--grau); }
+footer nav { display: flex; gap: 24px; }
+footer a { text-decoration: none; }
+footer a:hover { color: var(--tinte); text-decoration: underline; }
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#inhalt">Zum Inhalt springen</a>
+
+<header>
+  <div class="wrap kopf">
+    <a class="marke" href="#" translate="no">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><rect x="0" y="3" width="13" height="4" fill="#172230"/><rect x="5" y="9" width="12" height="4" fill="#172230"/><rect x="10" y="15" width="7" height="4" fill="#172230"/><rect x="16.5" y="13.5" width="5" height="5" transform="rotate(45 19 16)" fill="#f7b500"/></svg>
+      LMP Consulting
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menü</button>
+    <nav class="nav" id="nav" aria-label="Hauptnavigation">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#vorgehen">Vorgehen</a>
+      <a href="#profil">Profil</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inhalt">
+  <div class="wrap">
+    <div class="plan" aria-hidden="true">
+      <div class="wochen" data-wochen>
+        <span>KW 42</span><span class="jetzt">KW 43</span><span>KW 44</span><span>KW 45</span><span>KW 46</span><span>KW 47</span><span>KW 48</span><span>KW 49</span>
+      </div>
+      <ol class="balken">
+        <li style="--start:0; --start-m:0; --i:0"><span class="bar">Projekte planen.</span></li>
+        <li style="--start:1.25; --start-m:.3; --i:1"><span class="bar">Prozesse ordnen.</span></li>
+        <li style="--start:2.5; --start-m:.55; --i:2"><span class="bar">Arbeit automatisieren.</span><span class="meilenstein">Ziel</span></li>
+      </ol>
+      <div class="heute" data-heute style="left: 18%"><b>Heute</b></div>
+    </div>
+
+    <div class="hero-text">
+      <h1><strong>LMP Consulting</strong> berät Konzerne und Mittelstand bei IT&#8209;Projekten, Prozessmanagement und Automatisierung. Agil, klassisch oder hybrid, in Deutschland und international.</h1>
+      <div class="aktionen">
+        <a class="textlink" href="#leistungen">Leistungen ansehen</a>
+        <a class="btn" href="#kontakt">Erstgespräch vereinbaren</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="leistungen" aria-labelledby="h-leistungen">
+    <div class="wrap">
+      <div class="abschnitt-kopf">
+        <h2 id="h-leistungen">Leistungen</h2>
+        <p>Vier Arbeitspakete, die einzeln oder zusammen beauftragt werden. Ziel ist immer dasselbe: ein Ergebnis, das im Betrieb funktioniert.</p>
+      </div>
+      <div class="pakete">
+        <article class="paket">
+          <h3>Projektmanagement</h3>
+          <div><p>Von der Initiierung bis zur Abnahme. Agil, klassisch oder hybrid, je nachdem, was das Projekt braucht.</p>
+          <p class="aufgaben">Projektleitung, PMO, Neuausrichtung, Risikomanagement</p></div>
+        </article>
+        <article class="paket">
+          <h3>Prozessmanagement &amp; Automatisierung</h3>
+          <div><p>Ist-Analyse, Soll-Prozess, Umsetzung. Medienbrüche finden und wiederkehrende Arbeit automatisieren, mit den Systemen, die Sie schon haben.</p>
+          <p class="aufgaben">Prozessaufnahme, BPMN-Modellierung, Automatisierung, Schulung</p></div>
+        </article>
+        <article class="paket">
+          <h3>IT&#8209;Transformation</h3>
+          <div><p>Vom gewachsenen Altsystem zur modularen Zielarchitektur, ohne dass der Betrieb stillsteht.</p>
+          <p class="aufgaben">Zielbild, Roadmap, Migration, Rollout</p></div>
+        </article>
+        <article class="paket">
+          <h3>Künstliche Intelligenz</h3>
+          <div><p>KI dort, wo sie messbar hilft. Vom bewerteten Anwendungsfall über den Pilot bis in den Alltag.</p>
+          <p class="aufgaben">Use-Case-Bewertung, Pilot, Betrieb</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="vorgehen" aria-labelledby="h-vorgehen">
+    <div class="wrap">
+      <div class="abschnitt-kopf">
+        <h2 id="h-vorgehen">Vorgehen</h2>
+        <p>Jedes Projekt ist anders, der Ablauf dahinter bleibt verlässlich.</p>
+      </div>
+      <ol class="phasen">
+        <li class="phase"><h3>Verstehen</h3><div class="spur" aria-hidden="true"><i style="--von:0%; --dauer:25%"></i></div><p>Ausgangslage, Ziele und Beteiligte klären. Was muss am Ende stehen?</p></li>
+        <li class="phase"><h3>Planen</h3><div class="spur" aria-hidden="true"><i style="--von:18.75%; --dauer:25%"></i></div><p>Vorgehen, Meilensteine und Risiken festlegen.</p></li>
+        <li class="phase"><h3>Umsetzen</h3><div class="spur" aria-hidden="true"><i style="--von:37.5%; --dauer:50%"></i></div><p>Steuern, berichten, Entscheidungen vorbereiten. Probleme früh sichtbar machen.</p></li>
+        <li class="phase"><h3>Übergeben</h3><div class="spur" aria-hidden="true"><i style="--von:81.25%; --dauer:18.75%"></i></div><p>Dokumentiert in den Betrieb. Das Wissen bleibt in Ihrem Haus.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="profil" aria-labelledby="h-profil">
+    <div class="wrap profil">
+      <div class="foto">Porträtfoto<br>Monty Ozwirk</div>
+      <div>
+        <h2 id="h-profil">Wer dahintersteht</h2>
+        <p class="gross" style="margin-top:24px">Monty Ozwirk leitet LMP Consulting von Gangelt aus, an der Grenze zu den Niederlanden. <span class="platzhalter">[Zwei Sätze zu Werdegang, Branchen und typischen Projekten.]</span></p>
+        <dl class="fakten">
+          <div><dt>Sprachen</dt><dd>Deutsch, Englisch</dd></div>
+          <div><dt>Einsatz</dt><dd>Vor Ort und remote</dd></div>
+          <div><dt>Methoden</dt><dd>Agil, klassisch, hybrid</dd></div>
+          <div><dt>Zertifizierungen</dt><dd class="platzhalter">[z. B. PMP]</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" class="kontakt" aria-labelledby="h-kontakt">
+    <div class="wrap">
+      <p class="naechster">Nächster Meilenstein</p>
+      <h2 id="h-kontakt">Ein Erstgespräch über Ihr Projekt.</h2>
+      <a class="mail" href="mailto:lmpconsulting@web.de">lmpconsulting@web.de</a>
+      <div class="kontakt-zeilen">
+        <a class="textlink" href="tel:+4915737587403">+49 1573 7587403</a>
+        <span>Bruchstraße 18, 52538 Gangelt</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 LMP Consulting GmbH</span>
+    <nav aria-label="Rechtliches"><a href="#">Impressum</a><a href="#">Datenschutz</a></nav>
+  </div>
+</footer>
+
+<script>
+/* Kalenderwochen und „Heute“-Linie aus dem echten Datum */
+(function () {
+  const isoWoche = (d) => {
+    const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    const tag = t.getUTCDay() || 7;
+    t.setUTCDate(t.getUTCDate() + 4 - tag);
+    const jahrStart = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
+    return Math.ceil(((t - jahrStart) / 864e5 + 1) / 7);
+  };
+  const jetzt = new Date();
+  const spans = document.querySelectorAll('[data-wochen] span');
+  spans.forEach((s, i) => {
+    const d = new Date(jetzt); d.setDate(d.getDate() + (i - 1) * 7);
+    s.textContent = 'KW ' + isoWoche(d);
+    s.classList.toggle('jetzt', i === 1);
+  });
+  function setzeHeute() {
+    const spalten = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--spalten')) || 8;
+    const wochentag = (jetzt.getDay() || 7) - 1 + jetzt.getHours() / 24;   // 0 = Montag 0 Uhr
+    document.querySelector('[data-heute]').style.left = ((1 + wochentag / 7) / spalten * 100) + '%';
+  }
+  setzeHeute();
+  addEventListener('resize', setzeHeute);
+
+  const btn = document.querySelector('.menu-btn'), nav = document.getElementById('nav');
+  btn.addEventListener('click', () => { const o = nav.classList.toggle('offen'); btn.setAttribute('aria-expanded', o); });
+  nav.addEventListener('click', (e) => { if (e.target.tagName === 'A') { nav.classList.remove('offen'); btn.setAttribute('aria-expanded', 'false'); } });
+})();
+</script>
+</body>
+</html>

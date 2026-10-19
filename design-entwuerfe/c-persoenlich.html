@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Entwurf C · Persönlich — LMP Consulting</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#173b30">
+<!-- Entwurf: Schrift per Google-Fonts-CDN. Für die Live-Seite wird Mona Sans (OFL) selbst gehostet (DSGVO). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,200..900&display=swap">
+<style>
+:root {
+  --tanne:   #173b30;   /* tiefes Tannengrün statt IT-Navy */
+  --tanne-2: #1f4a3d;
+  --nebel:   #eef1ed;   /* kühles, grünstichiges Hell, kein Creme */
+  --tinte:   #13221c;
+  --grau:    #56635d;
+  --salbei:  #b9d2c2;
+  --linie:   #cfd8d2;
+
+  --schrift: "Mona Sans", "Helvetica Neue", Arial, sans-serif;
+  --rand: clamp(16px, 4vw, 56px);
+  --maxw: 1280px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--nebel); color: var(--tinte); font: 400 18px/1.6 var(--schrift); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.skip { position: absolute; left: -9999px; top: 8px; background: var(--tinte); color: var(--nebel); padding: 10px 14px; z-index: 100; }
+.skip:focus { left: 8px; }
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--rand); }
+
+/* ---------- Hero auf Tanne ---------- */
+.buehne { background: var(--tanne); color: var(--nebel); }
+.kopf { display: flex; justify-content: space-between; align-items: center; padding-top: 26px; padding-bottom: 26px; }
+.marke { text-decoration: none; font-weight: 650; font-size: 19px; font-variation-settings: "wdth" 110; letter-spacing: -.01em; }
+.nav { display: flex; gap: 30px; font-size: 16px; }
+.nav a { text-decoration: none; opacity: .78; padding: 6px 0; }
+.nav a:hover { opacity: 1; text-decoration: underline; text-decoration-color: var(--salbei); text-underline-offset: 6px; text-decoration-thickness: 1.5px; }
+.menu-btn { display: none; }
+@media (max-width: 760px) {
+  .nav { display: none; }
+  .nav.offen { display: flex; flex-direction: column; gap: 4px; position: absolute; top: 76px; left: var(--rand); right: var(--rand); background: var(--tanne-2); padding: 12px 18px; z-index: 20; }
+  .nav.offen a { opacity: 1; }
+  .menu-btn { display: inline-block; font: 500 16px var(--schrift); background: none; border: 1px solid rgba(238,241,237,.35); border-radius: 999px; padding: 8px 16px; color: var(--nebel); }
+}
+
+.hero { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: clamp(32px, 5vw, 88px); align-items: end; padding-top: clamp(24px, 6vw, 88px); padding-bottom: clamp(56px, 8vw, 112px); }
+.hero h1 {
+  margin: 0 0 36px;
+  font-weight: 600;
+  font-size: clamp(46px, 7.6vw, 116px);
+  line-height: .97;
+  letter-spacing: -.03em;
+  font-variation-settings: "wdth" 100, "wght" 600;
+}
+.hero h1 .wort { white-space: nowrap; display: inline-block; }
+.hero h1 .z { display: inline-block; font-variation-settings: "wdth" var(--w0, 100), "wght" var(--g0, 600); transition: font-variation-settings 1.4s cubic-bezier(.2,.7,.1,1); transition-delay: var(--d, 0s); }
+.hero h1.geordnet .z { font-variation-settings: "wdth" 100, "wght" 600; }
+.hero .lead { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.5; max-width: 32em; margin: 0 0 36px; color: rgba(238,241,237,.86); }
+.hero .lead strong { color: var(--nebel); font-weight: 600; }
+.aktionen { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; }
+.btn { display: inline-block; background: var(--nebel); color: var(--tanne); text-decoration: none; font-weight: 600; font-size: 17px; padding: 16px 26px; border-radius: 999px; transition: background-color .2s ease; }
+.btn:hover { background: var(--salbei); }
+.textlink { font-weight: 500; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1.5px; text-decoration-color: rgba(238,241,237,.4); }
+.textlink:hover { text-decoration-color: currentColor; }
+.portrait { margin: 0; }
+.portrait .foto { aspect-ratio: 3 / 4; background: var(--tanne-2); display: grid; place-items: center; color: rgba(238,241,237,.6); font-size: 15px; text-align: center; }
+.portrait figcaption { margin-top: 14px; font-size: 15px; color: rgba(238,241,237,.75); }
+.portrait figcaption strong { display: block; color: var(--nebel); font-weight: 600; font-size: 17px; }
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; }
+  .portrait { max-width: 300px; }
+}
+
+/* ---------- Abschnitte ---------- */
+section { padding-top: clamp(80px, 11vw, 150px); }
+h2 { font-weight: 600; font-size: clamp(32px, 4.4vw, 60px); line-height: 1.03; letter-spacing: -.028em; margin: 0 0 clamp(32px, 4vw, 56px); max-width: 15em; font-variation-settings: "wdth" 104; text-wrap: balance; }
+h3 { font-weight: 600; font-size: 25px; line-height: 1.2; letter-spacing: -.012em; margin: 0 0 10px; font-variation-settings: "wdth" 104; }
+p { margin: 0 0 1em; max-width: 36em; }
+
+.leistungen { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(32px, 6vw, 112px); }
+.leistung { padding: 28px 0 36px; border-top: 1px solid var(--linie); }
+.leistung p { color: var(--grau); }
+.leistung .beispiel { color: var(--tinte); font-size: 16px; margin: 0; }
+.leistung .beispiel strong { font-weight: 600; }
+@media (max-width: 760px) { .leistungen { grid-template-columns: 1fr; } }
+
+.weg { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 112px); }
+.weg h2 { margin-bottom: 0; }
+.schritte { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+.schritte li { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 4px 16px; padding: 22px 0; border-top: 1px solid var(--linie); }
+.schritte li::before { counter-increment: s; content: counter(s); grid-row: span 2; font-weight: 300; font-size: 40px; line-height: 1; font-variation-settings: "wdth" 80; color: var(--tanne); }
+.schritte h3 { margin: 0; font-size: 21px; }
+.schritte p { margin: 0; color: var(--grau); font-size: 16px; }
+@media (max-width: 860px) { .weg { grid-template-columns: 1fr; } }
+
+.ueber { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 112px); }
+.ueber .gross { font-size: clamp(22px, 2.3vw, 30px); line-height: 1.38; letter-spacing: -.012em; max-width: 24em; }
+.fakten { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; margin: 28px 0 0; font-size: 16px; }
+.fakten div { border-top: 1px solid var(--linie); padding: 12px 0; }
+.fakten dt { color: var(--grau); }
+.fakten dd { margin: 0; font-weight: 600; }
+.platzhalter { background: #fff3bf; color: var(--tinte); }
+@media (max-width: 860px) { .ueber { grid-template-columns: 1fr; } }
+
+/* Kontakt wieder auf Tanne: Klammer um die Seite */
+.schluss { background: var(--tanne); color: var(--nebel); margin-top: clamp(80px, 11vw, 150px); padding: clamp(72px, 10vw, 140px) 0 0; }
+.schluss h2 { color: var(--nebel); }
+.schluss p { color: rgba(238,241,237,.8); }
+.mail { display: inline-block; font-weight: 600; font-size: clamp(28px, 5.6vw, 84px); letter-spacing: -.03em; line-height: 1.05; text-decoration: none; font-variation-settings: "wdth" 96; border-bottom: 2px solid var(--salbei); padding-bottom: 6px; margin-top: 12px; word-break: break-word; }
+.mail:hover { color: var(--salbei); }
+.kontakt-zeilen { display: flex; flex-wrap: wrap; gap: 8px 48px; margin-top: 36px; font-size: 17px; }
+.kontakt-zeilen span { color: rgba(238,241,237,.7); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: clamp(72px, 9vw, 120px); border-top: 1px solid rgba(238,241,237,.18); padding-top: 22px; padding-bottom: 36px; font-size: 15px; color: rgba(238,241,237,.65); }
+footer nav { display: flex; gap: 24px; }
+footer a { text-decoration: none; }
+footer a:hover { color: var(--nebel); text-decoration: underline; }
+</style>
+</head>
+<body>
+<a class="skip" href="#inhalt">Zum Inhalt springen</a>
+
+<div class="buehne">
+  <header>
+    <div class="wrap kopf">
+      <a class="marke" href="#" translate="no">LMP Consulting</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menü</button>
+      <nav class="nav" id="nav" aria-label="Hauptnavigation">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#vorgehen">Vorgehen</a>
+        <a href="#ueber">Über mich</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap hero" id="inhalt">
+    <div>
+      <h1 data-ordnen>Ich bringe Ordnung in IT&#8209;Projekte.</h1>
+      <p class="lead"><strong>Monty Ozwirk, LMP Consulting.</strong> Projektmanagement, Prozessautomatisierung und IT&#8209;Transformation für Konzerne und Mittelstand. Agil, klassisch oder hybrid.</p>
+      <div class="aktionen">
+        <a class="btn" href="#kontakt">Gespräch vereinbaren</a>
+        <a class="textlink" href="#leistungen">Was ich mache</a>
+      </div>
+    </div>
+    <figure class="portrait">
+      <div class="foto">Porträtfoto<br>(natürliches Licht, kein Studio)</div>
+      <figcaption><strong>Monty Ozwirk</strong>Geschäftsführer, Gangelt</figcaption>
+    </figure>
+  </div>
+</div>
+
+<main>
+  <section id="leistungen" aria-labelledby="h-leistungen">
+    <div class="wrap">
+      <h2 id="h-leistungen">Wobei ich unterstütze</h2>
+      <div class="leistungen">
+        <article class="leistung">
+          <h3>Projektmanagement</h3>
+          <p>Von der Initiierung bis zur Abnahme. Agil, klassisch oder hybrid, je nachdem, was das Projekt braucht.</p>
+          <p class="beispiel"><strong>Typischer Fall:</strong> Ein Projekt ist ins Stocken geraten und braucht eine neue Struktur.</p>
+        </article>
+        <article class="leistung">
+          <h3>Prozessmanagement &amp; Automatisierung</h3>
+          <p>Ist-Analyse, Soll-Prozess, Umsetzung. Medienbrüche finden und wiederkehrende Arbeit automatisieren, mit den Systemen, die schon da sind.</p>
+          <p class="beispiel"><strong>Typischer Fall:</strong> Ein Freigabeprozess läuft über Mails und Excel und dauert Wochen.</p>
+        </article>
+        <article class="leistung">
+          <h3>IT&#8209;Transformation</h3>
+          <p>Vom gewachsenen Altsystem zur modularen Zielarchitektur, ohne dass der Betrieb stillsteht.</p>
+          <p class="beispiel"><strong>Typischer Fall:</strong> Ein Altsystem soll abgelöst werden, aber niemand kennt mehr alle Abhängigkeiten.</p>
+        </article>
+        <article class="leistung">
+          <h3>Künstliche Intelligenz</h3>
+          <p>KI dort, wo sie messbar hilft. Vom bewerteten Anwendungsfall über den Pilot bis in den Alltag.</p>
+          <p class="beispiel"><strong>Typischer Fall:</strong> Viele Ideen für KI, aber kein Fall mit klarem Nutzen.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="vorgehen" aria-labelledby="h-vorgehen">
+    <div class="wrap weg">
+      <h2 id="h-vorgehen">Wie ein Auftrag abläuft</h2>
+      <ol class="schritte">
+        <li><h3>Verstehen</h3><p>Ausgangslage, Ziele und Beteiligte klären. Was muss am Ende stehen?</p></li>
+        <li><h3>Planen</h3><p>Vorgehen, Meilensteine und Risiken festlegen.</p></li>
+        <li><h3>Umsetzen</h3><p>Steuern, berichten, Entscheidungen vorbereiten. Probleme früh sichtbar machen.</p></li>
+        <li><h3>Übergeben</h3><p>Dokumentiert in den Betrieb. Das Wissen bleibt in Ihrem Haus.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="ueber" aria-labelledby="h-ueber">
+    <div class="wrap ueber">
+      <h2 id="h-ueber">Über mich</h2>
+      <div>
+        <p class="gross">Ich leite LMP Consulting von Gangelt aus, an der Grenze zu den Niederlanden. <span class="platzhalter">[Zwei Sätze zu Werdegang, Branchen und typischen Projekten.]</span></p>
+        <dl class="fakten">
+          <div><dt>Sprachen</dt><dd>Deutsch, Englisch</dd></div>
+          <div><dt>Einsatz</dt><dd>Vor Ort und remote</dd></div>
+          <div><dt>Methoden</dt><dd>Agil, klassisch, hybrid</dd></div>
+          <div><dt>Zertifizierungen</dt><dd><span class="platzhalter">[z. B. PMP]</span></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="schluss" id="kontakt">
+  <div class="wrap">
+    <h2>Erzählen Sie mir von Ihrem Projekt.</h2>
+    <p>Eine kurze Mail oder ein Anruf genügt. Wir ordnen Ihr Vorhaben gemeinsam ein und besprechen einen ersten Schritt.</p>
+    <a class="mail" href="mailto:lmpconsulting@web.de">lmpconsulting@web.de</a>
+    <div class="kontakt-zeilen">
+      <a class="textlink" href="tel:+4915737587403">+49 1573 7587403</a>
+      <span>Bruchstraße 18, 52538 Gangelt</span>
+    </div>
+  </div>
+  <footer>
+    <div class="wrap">
+      <span>© 2026 LMP Consulting GmbH</span>
+      <nav aria-label="Rechtliches"><a href="#">Impressum</a><a href="#">Datenschutz</a></nav>
+    </div>
+  </footer>
+</div>
+
+<script>
+/* Headline ordnet sich einmal beim Laden: Buchstaben starten in gemischten Breiten und Stärken. */
+(function () {
+  const h1 = document.querySelector('[data-ordnen]');
+  const text = h1.textContent;
+  const ruhig = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!ruhig) {
+    h1.setAttribute('aria-label', text);
+    h1.innerHTML = text.split(' ').map((wort) =>
+      '<span class="wort" aria-hidden="true">' + [...wort].map((z) => {
+        const w = Math.round(75 + Math.random() * 50);
+        const g = Math.round(250 + Math.random() * 600);
+        const d = (Math.random() * 0.5).toFixed(2);
+        return `<span class="z" style="--w0:${w};--g0:${g};--d:${d}s">${z}</span>`;
+      }).join('') + '</span>'
+    ).join(' ');
+    const los = () => setTimeout(() => h1.classList.add('geordnet'), 500);
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(los);
+  }
+
+  const btn = document.querySelector('.menu-btn'), nav = document.getElementById('nav');
+  btn.addEventListener('click', () => { const o = nav.classList.toggle('offen'); btn.setAttribute('aria-expanded', o); });
+  nav.addEventListener('click', (e) => { if (e.target.tagName === 'A') { nav.classList.remove('offen'); btn.setAttribute('aria-expanded', 'false'); } });
+})();
+</script>
+</body>
+</html>

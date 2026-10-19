@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Entwurf A · Roter Faden — LMP Consulting</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ffffff">
+<!-- Entwurf: Schrift per Google-Fonts-CDN. Für die Live-Seite wird Schibsted Grotesk (OFL) selbst gehostet (DSGVO). -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..800&display=swap">
+<style>
+:root {
+  --weiss:     #ffffff;
+  --flaeche:   #f1f2f2;
+  --anthrazit: #2b3236;   /* angelehnt an RAL 7016 Anthrazitgrau */
+  --grau:      #5f666b;
+  --linie:     #d9dcde;
+  --rot:       #c8161d;   /* angelehnt an RAL 3020 Verkehrsrot */
+
+  --schrift: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+
+  --rail: clamp(56px, 11vw, 160px);   /* Spur links, in der der Faden läuft */
+  --rand: clamp(16px, 4vw, 48px);
+  --maxw: 1280px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--weiss);
+  color: var(--anthrazit);
+  font: 400 18px/1.6 var(--schrift);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--rot); outline-offset: 3px; border-radius: 2px; }
+
+.skip { position: absolute; left: -9999px; top: 8px; background: var(--anthrazit); color: var(--weiss); padding: 10px 14px; z-index: 100; }
+.skip:focus { left: 8px; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--rand) 0 calc(var(--rand) + var(--rail)); position: relative; }
+
+/* ---------- Faden ---------- */
+#faden { position: absolute; inset: 0 auto auto 0; width: 100%; pointer-events: none; z-index: 1; overflow: visible; }
+#faden path { fill: none; stroke: var(--rot); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+#faden circle { fill: var(--rot); opacity: 0; transition: opacity .4s ease; }
+#faden circle.an { opacity: 1; }
+main, header, footer { position: relative; z-index: 2; }
+
+/* ---------- Kopf ---------- */
+.kopf { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; padding-bottom: 28px; }
+.marke { display: inline-flex; align-items: baseline; gap: .5em; text-decoration: none; font-weight: 600; font-size: 19px; letter-spacing: -.01em; }
+.marke small { font-weight: 400; color: var(--grau); font-size: 15px; letter-spacing: 0; }
+.nav { display: flex; gap: 32px; font-size: 16px; }
+.nav a { text-decoration: none; color: var(--grau); padding: 6px 0; }
+.nav a:hover { color: var(--anthrazit); text-decoration: underline; text-decoration-color: var(--rot); text-underline-offset: 6px; text-decoration-thickness: 1.5px; }
+.menu-btn { display: none; }
+@media (max-width: 760px) {
+  :root { --rail: 26px; }
+  .nav { display: none; }
+  .nav.offen { display: flex; flex-direction: column; gap: 4px; position: absolute; top: 72px; left: calc(var(--rand) + var(--rail)); right: var(--rand); background: var(--weiss); border: 1px solid var(--linie); padding: 12px 18px; }
+  .menu-btn { display: inline-block; font: 500 16px var(--schrift); background: none; border: 1px solid var(--linie); border-radius: 3px; padding: 8px 14px; color: var(--anthrazit); }
+}
+
+/* ---------- Hero ---------- */
+.hero { min-height: calc(100svh - 100px); display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); align-items: center; gap: 24px; padding-bottom: 72px; }
+.hero h1 {
+  font-weight: 500;
+  font-size: clamp(44px, 7.2vw, 104px);
+  line-height: .98;
+  letter-spacing: -.035em;
+  margin: 0 0 32px;
+  text-wrap: balance;
+}
+.hero .lead { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.5; max-width: 34em; margin: 0 0 40px; color: var(--anthrazit); }
+.hero .lead span { color: var(--grau); }
+.aktionen { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; }
+.btn { display: inline-block; background: var(--anthrazit); color: var(--weiss); text-decoration: none; font-weight: 500; font-size: 17px; padding: 16px 24px; border-radius: 3px; transition: background-color .2s ease; }
+.btn:hover { background: var(--rot); }
+.textlink { font-weight: 500; text-decoration: underline; text-decoration-color: var(--linie); text-underline-offset: 6px; text-decoration-thickness: 1.5px; transition: text-decoration-color .2s ease; }
+.textlink:hover { text-decoration-color: var(--rot); }
+.knaeuel { aspect-ratio: 1; width: 100%; max-width: 420px; justify-self: end; }
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 24px; }
+  .knaeuel { order: -1; max-width: 220px; justify-self: start; }
+}
+
+/* ---------- Abschnitte ---------- */
+section { padding: clamp(72px, 12vw, 160px) 0 0; }
+h2 {
+  font-weight: 500;
+  font-size: clamp(32px, 4.2vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -.025em;
+  margin: 0 0 clamp(32px, 5vw, 64px);
+  max-width: 16em;
+  text-wrap: balance;
+}
+h3 { font-weight: 600; font-size: 24px; line-height: 1.2; letter-spacing: -.012em; margin: 0 0 12px; }
+p { margin: 0 0 1em; max-width: 36em; }
+.grau { color: var(--grau); }
+
+/* Leistungen: ruhige Liste statt Kartenraster */
+.leistungen { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(40px, 5vw, 72px) clamp(32px, 5vw, 96px); }
+.leistung p { color: var(--grau); }
+.leistung ul { margin: 16px 0 0; padding: 0; list-style: none; font-size: 16px; }
+.leistung li { padding: 8px 0; border-top: 1px solid var(--linie); }
+@media (max-width: 760px) { .leistungen { grid-template-columns: 1fr; } }
+
+/* Vorgehen: echte Abfolge, deshalb mit Reihenfolge */
+.schritte { list-style: none; margin: 0; padding: 0 72px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; counter-reset: s; }
+.schritt { position: relative; padding-top: 40px; }
+.schritt .mark { position: absolute; top: 0; left: 0; width: 14px; height: 14px; }
+.schritt h3 { font-size: 21px; }
+.schritt h3::before { counter-increment: s; content: counter(s) ". "; color: var(--grau); font-weight: 400; }
+.schritt p { font-size: 16px; color: var(--grau); }
+@media (max-width: 900px) { .schritte { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 48px; padding-right: 0; } .schritt { padding-top: 0; } .schritt .mark { display: none; } }
+@media (max-width: 520px) { .schritte { grid-template-columns: 1fr; } }
+
+/* Profil */
+.profil { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+.foto { aspect-ratio: 4 / 5; background: var(--flaeche); display: grid; place-items: center; color: var(--grau); font-size: 15px; text-align: center; padding: 24px; }
+.profil .gross { font-size: clamp(22px, 2.2vw, 28px); line-height: 1.4; letter-spacing: -.01em; max-width: 24em; }
+.fakten { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 32px; margin-top: 32px; font-size: 16px; }
+.fakten div { border-top: 1px solid var(--linie); padding-top: 10px; }
+.fakten dt { color: var(--grau); }
+.fakten dd { margin: 0; font-weight: 500; }
+.platzhalter { background: #fff4c2; }
+@media (max-width: 760px) { .profil { grid-template-columns: 1fr; } .foto { max-width: 360px; } }
+
+/* Kontakt */
+.kontakt { padding-bottom: clamp(72px, 10vw, 140px); }
+.mail {
+  display: inline-block;
+  font-weight: 500;
+  font-size: clamp(28px, 5.4vw, 76px);
+  letter-spacing: -.03em;
+  line-height: 1.1;
+  text-decoration: none;
+  padding-bottom: 14px;
+  word-break: break-word;
+}
+.mail:hover { color: var(--rot); }
+.kontakt-zeilen { display: flex; flex-wrap: wrap; gap: 8px 48px; margin-top: 40px; font-size: 17px; }
+.kontakt-zeilen span { color: var(--grau); }
+
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; border-top: 1px solid var(--linie); padding-top: 24px; padding-bottom: 40px; font-size: 15px; color: var(--grau); }
+footer nav { display: flex; gap: 24px; }
+footer a { text-decoration: none; }
+footer a:hover { color: var(--anthrazit); text-decoration: underline; }
+
+@media (prefers-reduced-motion: reduce) {
+  #faden circle { transition: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#inhalt">Zum Inhalt springen</a>
+
+<svg id="faden" aria-hidden="true"><path id="faden-pfad"/><g id="knoten"></g></svg>
+
+<header>
+  <div class="wrap kopf">
+    <a class="marke" href="#" translate="no">LMP Consulting <small>GmbH</small></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menü</button>
+    <nav class="nav" id="nav" aria-label="Hauptnavigation">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#vorgehen">Vorgehen</a>
+      <a href="#profil">Profil</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inhalt">
+  <div class="wrap hero">
+    <div>
+      <h1>Jedes IT&#8209;Projekt braucht einen roten Faden.</h1>
+      <p class="lead">Wir steuern IT&#8209;Projekte, ordnen Prozesse und automatisieren, was sich wiederholt. <span>Für Konzerne und Mittelstand, in Deutschland und international.</span></p>
+      <div class="aktionen">
+        <a class="btn" href="#kontakt">Erstgespräch vereinbaren</a>
+        <a class="textlink" href="#leistungen">Leistungen ansehen</a>
+      </div>
+    </div>
+    <div class="knaeuel" data-knaeuel aria-hidden="true"></div>
+  </div>
+
+  <section id="leistungen" aria-labelledby="h-leistungen">
+    <div class="wrap">
+      <h2 id="h-leistungen" data-knoten>Vier Themen, ein durchgehender Plan.</h2>
+      <div class="leistungen">
+        <article class="leistung">
+          <h3>Projektmanagement</h3>
+          <p>Von der Initiierung bis zur Abnahme. Agil, klassisch oder hybrid, je nachdem, was das Projekt braucht.</p>
+          <ul><li>Projektleitung und PMO</li><li>Aufsetzen und Neuausrichten von Projekten</li><li>Steuerung, Reporting, Risikomanagement</li></ul>
+        </article>
+        <article class="leistung">
+          <h3>Prozessmanagement &amp; Automatisierung</h3>
+          <p>Ist-Analyse, Soll-Prozess, Umsetzung. Wir finden Medienbrüche und automatisieren wiederkehrende Arbeit mit den Systemen, die Sie schon haben.</p>
+          <ul><li>Prozessaufnahme und Modellierung (BPMN)</li><li>Optimierung und Automatisierung</li><li>Einführung und Schulung</li></ul>
+        </article>
+        <article class="leistung">
+          <h3>IT&#8209;Transformation</h3>
+          <p>Vom gewachsenen Altsystem zur modularen Zielarchitektur, ohne dass der Betrieb stillsteht.</p>
+          <ul><li>Zielbild und Roadmap</li><li>Migration und Rollout</li><li>Einführung neuer Systeme</li></ul>
+        </article>
+        <article class="leistung">
+          <h3>Künstliche Intelligenz</h3>
+          <p>KI dort, wo sie messbar hilft. Vom bewerteten Anwendungsfall über den Pilot bis in den Alltag.</p>
+          <ul><li>Anwendungsfälle bewerten</li><li>Pilotprojekte aufsetzen</li><li>Überführung in den Betrieb</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="vorgehen" aria-labelledby="h-vorgehen">
+    <div class="wrap">
+      <h2 id="h-vorgehen" data-knoten>So arbeiten wir.</h2>
+      <ol class="schritte">
+        <li class="schritt"><span class="mark" data-schritt></span><h3>Verstehen</h3><p>Ausgangslage, Ziele und Beteiligte klären. Was muss am Ende stehen?</p></li>
+        <li class="schritt"><span class="mark" data-schritt></span><h3>Planen</h3><p>Vorgehen, Meilensteine und Risiken festlegen. Agil, klassisch oder hybrid.</p></li>
+        <li class="schritt"><span class="mark" data-schritt></span><h3>Umsetzen</h3><p>Steuern, berichten, Entscheidungen vorbereiten. Probleme früh sichtbar machen.</p></li>
+        <li class="schritt"><span class="mark" data-schritt></span><h3>Übergeben</h3><p>Dokumentiert in den Betrieb. Das Wissen bleibt in Ihrem Haus.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="profil" aria-labelledby="h-profil">
+    <div class="wrap profil">
+      <div class="foto">Porträtfoto<br>Monty Ozwirk</div>
+      <div>
+        <h2 id="h-profil" data-knoten>Wer dahintersteht.</h2>
+        <p class="gross">Monty Ozwirk leitet LMP Consulting von Gangelt aus, an der Grenze zu den Niederlanden. <span class="platzhalter">[Zwei Sätze zu Werdegang, Branchen und typischen Projekten.]</span></p>
+        <dl class="fakten">
+          <div><dt>Sprachen</dt><dd>Deutsch, Englisch</dd></div>
+          <div><dt>Einsatz</dt><dd>Vor Ort und remote</dd></div>
+          <div><dt>Methoden</dt><dd>Agil, klassisch, hybrid</dd></div>
+          <div><dt>Zertifizierungen</dt><dd class="platzhalter">[z. B. PMP, PRINCE2]</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" class="kontakt" aria-labelledby="h-kontakt">
+    <div class="wrap">
+      <h2 id="h-kontakt" data-knoten>Worum geht es in Ihrem Projekt?</h2>
+      <p class="grau">Eine kurze Mail oder ein Anruf genügt. Wir ordnen Ihr Vorhaben gemeinsam ein und besprechen einen ersten Schritt.</p>
+      <a class="mail" href="mailto:lmpconsulting@web.de" data-ende>lmpconsulting@web.de</a>
+      <div class="kontakt-zeilen">
+        <a class="textlink" href="tel:+4915737587403">+49 1573 7587403</a>
+        <span>Bruchstraße 18, 52538 Gangelt</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 LMP Consulting GmbH</span>
+    <nav aria-label="Rechtliches"><a href="#">Impressum</a><a href="#">Datenschutz</a></nav>
+  </div>
+</footer>
+
+<script>
+/* Roter Faden: ein Knäuel im Hero, das sich beim Scrollen zu einer Linie durch die Seite entwirrt. */
+(function () {
+  const svg = document.getElementById('faden');
+  const pfad = document.getElementById('faden-pfad');
+  const knotenG = document.getElementById('knoten');
+  const ruhig = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let laenge = 0, knaeuelLaenge = 0, tabelle = [], knoten = [], introFertig = ruhig;
+
+  const abs = (el) => { const r = el.getBoundingClientRect(); return { x: r.left + scrollX, y: r.top + scrollY, w: r.width, h: r.height }; };
+
+  function knaeuelPunkte(cx, cy, r) {
+    // Wollknäuel: überlagerte Schwingungen mit ungeraden Frequenzen, läuft unten links aus
+    const pts = [];
+    const n = 260, umlauf = Math.PI * 2 * 2.6;
+    for (let i = 0; i <= n; i++) {
+      const t = i / n, a = t * umlauf;
+      let x = 0.62 * Math.sin(3.1 * a + 0.4) + 0.38 * Math.sin(5.3 * a + 1.1);
+      let y = 0.62 * Math.cos(2.7 * a) + 0.38 * Math.cos(4.9 * a + 0.5);
+      const raus = Math.max(0, (t - 0.86) / 0.14);          // letzte 14 %: nach unten links ziehen
+      x = x * (1 - raus) + (-0.35) * raus;
+      y = y * (1 - raus) + 1.15 * raus;
+      pts.push([cx + x * r, cy + y * r]);
+    }
+    return pts;
+  }
+
+  function glatt(pts) {
+    // zentripetaler Catmull-Rom -> kubische Bezier (keine Schlaufen an engen Stellen)
+    const dist = (a, b) => Math.max(1e-3, Math.sqrt(Math.hypot(b[0] - a[0], b[1] - a[1])));
+    let d = `M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}`;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
+      const d1 = dist(p0, p1), d2 = dist(p1, p2), d3 = dist(p2, p3);
+      const c1 = [0, 1].map((k) => (d1 * d1 * p2[k] - d2 * d2 * p0[k] + (2 * d1 * d1 + 3 * d1 * d2 + d2 * d2) * p1[k]) / (3 * d1 * (d1 + d2)));
+      const c2 = [0, 1].map((k) => (d3 * d3 * p1[k] - d2 * d2 * p3[k] + (2 * d3 * d3 + 3 * d3 * d2 + d2 * d2) * p2[k]) / (3 * d3 * (d3 + d2)));
+      d += ` C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;
+    }
+    return d;
+  }
+
+  function bauen() {
+    const docH = document.documentElement.scrollHeight;
+    svg.setAttribute('width', document.documentElement.clientWidth);
+    svg.setAttribute('height', docH);
+    svg.style.height = docH + 'px';
+
+    const wrap = document.querySelector('.wrap');
+    const w = abs(wrap);
+    const railX = w.x + parseFloat(getComputedStyle(wrap).paddingLeft) * 0.42;
+
+    const k = abs(document.querySelector('[data-knaeuel]'));
+    const r = Math.min(k.w, k.h) * 0.42;
+    const tangle = knaeuelPunkte(k.x + k.w / 2, k.y + k.h / 2, r);
+    const punkte = tangle.slice();
+    const knotenPunkte = [];
+
+    // Übergang vom Knäuel zur Spur links: erst nach unten, unterhalb der Buttons nach links
+    const last = tangle[tangle.length - 1];
+    const hero = abs(document.querySelector('.hero'));
+    const unterHero = hero.y + hero.h - 24;
+    if (innerWidth <= 900) {
+      // schmal: Knäuel steht über dem Text, also sofort auf die Spur links und daneben herunter
+      punkte.push([railX + 10, last[1] + 24]);
+      punkte.push([railX, last[1] + 70]);
+      punkte.push([railX, unterHero + 40]);
+    } else {
+      punkte.push([last[0] - 10, Math.max(last[1] + 30, unterHero - 50)]);
+      punkte.push([last[0] - 80, unterHero]);
+      punkte.push([railX + 90, unterHero + 10]);
+      punkte.push([railX, unterHero + 70]);
+    }
+
+    document.querySelectorAll('section').forEach((sec) => {
+      const h2 = abs(sec.querySelector('[data-knoten]'));
+      const y = h2.y + Math.min(h2.h, 60) / 2;
+      punkte.push([railX, y - 80]);
+      punkte.push([railX, y]);
+      knotenPunkte.push([railX, y]);
+
+      const marks = sec.querySelectorAll('[data-schritt]');
+      if (marks.length && innerWidth <= 900) {
+        // schmal: Schritte als Knoten auf der Spur, wie eine Zeitleiste
+        marks.forEach((m) => { const a = abs(m.closest('li')); punkte.push([railX, a.y + 14]); knotenPunkte.push([railX, a.y + 14]); });
+      } else if (marks.length) {
+        const m0 = abs(marks[0]);
+        const mN = abs(marks[marks.length - 1]);
+        const liste = abs(sec.querySelector('.schritte'));
+        const my = m0.y + 7;
+        punkte.push([railX, my - 50]);
+        punkte.push([railX + 30, my - 6]);
+        marks.forEach((m) => { const a = abs(m); punkte.push([a.x + 7, my]); knotenPunkte.push([a.x + 7, my]); });
+        // rechts heraus, unter den Texten zurück zur Spur
+        const rechts = liste.x + liste.w + 8;
+        const zurueckY = liste.y + liste.h + 56;
+        punkte.push([Math.min(rechts, mN.x + 7 + 120), my]);
+        punkte.push([rechts + 10, my + 60]);
+        punkte.push([rechts - 20, zurueckY - 10]);
+        punkte.push([railX + 120, zurueckY]);
+        punkte.push([railX, zurueckY + 60]);
+      }
+    });
+
+    // Ende: Unterstreichung der Mailadresse
+    const e = abs(document.querySelector('[data-ende]'));
+    const uy = e.y + e.h - 4;
+    punkte.push([railX, uy - 40]);
+    punkte.push([e.x - 6, uy]);
+    punkte.push([e.x + e.w * 0.5, uy]);
+    punkte.push([e.x + e.w, uy]);
+
+    pfad.setAttribute('d', glatt(punkte));
+    laenge = pfad.getTotalLength();
+
+    // Länge bis Knäuel-Ende ermitteln und Nachschlagetabelle Länge -> y
+    tabelle = [];
+    knaeuelLaenge = 0;
+    const schritt = 6;
+    for (let l = 0; l <= laenge; l += schritt) {
+      const p = pfad.getPointAtLength(l);
+      tabelle.push([l, p.x, p.y]);
+    }
+    let best = Infinity;
+    for (const [l, x, y] of tabelle) {
+      const dd = Math.hypot(x - last[0], y - last[1]);
+      if (dd < best) { best = dd; knaeuelLaenge = l; }
+    }
+
+    knotenG.innerHTML = '';
+    knoten = knotenPunkte.map(([x, y]) => {
+      const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 4);
+      knotenG.appendChild(c);
+      let nah = 0, d0 = Infinity;
+      for (const [l, px, py] of tabelle) { const dd = Math.hypot(px - x, py - y); if (dd < d0) { d0 = dd; nah = l; } }
+      return { c, l: nah };
+    });
+
+    pfad.style.strokeDasharray = laenge;
+    zeichnen();
+  }
+
+  function sichtbareLaenge() {
+    if (ruhig) return laenge;
+    const ziel = scrollY + innerHeight * 0.72;
+    let l = knaeuelLaenge;
+    for (const [len, , y] of tabelle) { if (len < knaeuelLaenge) continue; if (y > ziel) break; l = len; }
+    return l;
+  }
+
+  let introL = ruhig ? Infinity : 0;
+  function zeichnen() {
+    const l = introFertig ? sichtbareLaenge() : Math.min(introL, knaeuelLaenge);
+    pfad.style.strokeDashoffset = Math.max(0, laenge - l);
+    knoten.forEach((k) => k.c.classList.toggle('an', l >= k.l - 2));
+  }
+
+  function intro() {
+    const start = performance.now(), dauer = 2200;
+    const ease = (t) => 1 - Math.pow(1 - t, 3);
+    (function tick(now) {
+      const t = Math.min(1, (now - start) / dauer);
+      introL = ease(t) * knaeuelLaenge;
+      zeichnen();
+      if (t < 1) requestAnimationFrame(tick); else { introFertig = true; zeichnen(); }
+    })(start);
+  }
+
+  let rafPending = false;
+  addEventListener('scroll', () => {
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(() => { rafPending = false; introFertig = true; zeichnen(); });
+  }, { passive: true });
+  let to; addEventListener('resize', () => { clearTimeout(to); to = setTimeout(bauen, 150); });
+
+  const start = () => { bauen(); if (!ruhig) intro(); };
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(start);
+
+  // Mobile-Menü
+  const btn = document.querySelector('.menu-btn'), nav = document.getElementById('nav');
+  btn.addEventListener('click', () => { const o = nav.classList.toggle('offen'); btn.setAttribute('aria-expanded', o); });
+  nav.addEventListener('click', (e) => { if (e.target.tagName === 'A') { nav.classList.remove('offen'); btn.setAttribute('aria-expanded', 'false'); } });
+})();
+</script>
+</body>
+</html>
