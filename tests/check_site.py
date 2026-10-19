@@ -139,6 +139,8 @@ def pruefe_seiten() -> None:
                     fail(f"index.html: {klasse} soll entfernt sein")
             if 'class="wolke branchen-wolke"' not in roh or 'class="wolke themen-wolke"' not in roh:
                 fail("index.html: Branchen- und Themenwolke fehlen")
+            if "Pharmaindustrie" not in text:
+                fail("index.html: Pharmaindustrie fehlt in der Branchenwolke")
             if roh.count("data-zahl=") != 3:
                 fail("index.html: genau drei hochzählende Zahlen erwartet")
         if name in ("impressum.html", "datenschutz.html", "404.html"):
