@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<!-- Vorlage für public/og.png (1200×630). Wird nicht veröffentlicht. -->
+<style>
+@font-face { font-family: "Schibsted Grotesk"; src: url("../public/assets/fonts/SchibstedGrotesk-Variable.woff2") format("woff2"); font-weight: 400 800; }
+html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+body { background: #eceff1; color: #2b3236; font-family: "Schibsted Grotesk", Arial, sans-serif; position: relative; }
+.marke { position: absolute; left: 80px; top: 64px; display: flex; align-items: center; gap: 14px; font-size: 28px; font-weight: 600; letter-spacing: -.01em; }
+.marke small { font-weight: 400; color: #575e63; font-size: 22px; }
+h1 { position: absolute; left: 80px; top: 170px; width: 700px; margin: 0; font-weight: 500; font-size: 76px; line-height: .98; letter-spacing: -.035em; }
+p { position: absolute; left: 80px; bottom: 64px; margin: 0; font-size: 26px; color: #575e63; }
+svg.k { position: absolute; right: 40px; top: 90px; }
+svg.k path { fill: none; stroke: #c8161d; stroke-width: 2.2; stroke-linecap: round; }
+</style>
+</head>
+<body>
+<div class="marke"><svg width="39" height="27" viewBox="0 0 26 18"><path d="M1 13 C7 13 9 3 13.5 4.5 C18 6 14.5 14 11 11 C8 8.5 13 13 25 13" fill="none" stroke="#c8161d" stroke-width="1.8" stroke-linecap="round"/></svg>LMP Consulting <small>GmbH</small></div>
+<h1>Jedes IT&#8209;Projekt braucht einen roten Faden.</h1>
+<p>Projektmanagement, Prozessautomatisierung, KI</p>
+<svg class="k" width="380" height="460" viewBox="0 0 380 460"><path id="p"/></svg>
+<script>
+// gleiches Knäuel wie auf der Website, als statisches Bild
+const cx = 190, cy = 200, r = 160, pts = [];
+for (let i = 0; i <= 260; i++) {
+  const t = i / 260, a = t * Math.PI * 2 * 2.6;
+  let x = 0.62 * Math.sin(3.1 * a + 0.4) + 0.38 * Math.sin(5.3 * a + 1.1);
+  let y = 0.62 * Math.cos(2.7 * a) + 0.38 * Math.cos(4.9 * a + 0.5);
+  const raus = Math.max(0, (t - 0.86) / 0.14);
+  x = x * (1 - raus) - 0.35 * raus; y = y * (1 - raus) + 1.15 * raus;
+  pts.push([cx + x * r, cy + y * r]);
+}
+pts.push([cx - 0.35 * r - 30, 460]);
+let d = 'M' + pts[0];
+for (let i = 0; i < pts.length - 1; i++) {
+  const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
+  d += ` C${p1[0] + (p2[0] - p0[0]) / 6},${p1[1] + (p2[1] - p0[1]) / 6} ${p2[0] - (p3[0] - p1[0]) / 6},${p2[1] - (p3[1] - p1[1]) / 6} ${p2[0]},${p2[1]}`;
+}
+document.getElementById('p').setAttribute('d', d);
+</script>
+</body>
+</html>

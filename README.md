@@ -1,33 +1,45 @@
 # LMP Consulting GmbH — Website
 
-Statische One-Page-Website der LMP Consulting GmbH. Kein Build-Step, keine externen
-Schriften, keine Tracker, keine JavaScript-Bibliotheken. Alle Animationen sind SMIL
-und CSS, alle Grafiken inline SVG.
+Statische One-Page der LMP Consulting GmbH. Kein Build-Schritt, keine Frameworks, keine Tracker,
+keine externen Schriften oder Skripte. Gehostet auf Netlify.
 
-## Dateien
+## Aufbau
 
-- `index.html` — Startseite (Hero, Leistungen 2x2, Kontakt) mit allen Animationen
-- `impressum.html` — Pflichtangaben gemäß § 5 DDG
-- `datenschutz.html` — Datenschutzerklärung (datensparsam, ohne Cookies)
-- `robots.txt`, `sitemap.xml` — SEO
-- `vercel.json` — Konfiguration für Vercel (cleanUrls + Redirects der alten Routen)
+- `public/` — alles, was veröffentlicht wird
+  - `index.html`, `impressum.html`, `datenschutz.html`, `404.html`
+  - `assets/site.css` — gesamte Gestaltung (Farben und Schrift als CSS-Variablen am Anfang)
+  - `assets/faden.js` — der rote Faden und das Schließen des Mobilmenüs
+  - `assets/fonts/` — Schibsted Grotesk (OFL, Lizenz liegt daneben)
+  - `og.png`, `favicon.svg`, `apple-touch-icon.png`, `robots.txt`, `sitemap.xml`, `.well-known/security.txt`
+- `netlify.toml` — Publish-Ordner, Security-Header (CSP u. a.), Weiterleitungen alter Adressen
+- `tests/check_site.py` — automatische Prüfungen
+- `tools/` — lokaler Server mit echten Headern, Rendern des Vorschaubilds
+- `design-entwuerfe/` — Designentwürfe aus dem Redesign (werden nicht veröffentlicht)
+- `docs/` — Audit, Spezifikation, Umsetzungsplan
 
-## Lokal anschauen
+## Regeln
 
-Einfach `index.html` im Browser öffnen, oder von der Konsole:
+- Kein Inline-CSS, kein Inline-JavaScript, keine `style`-Attribute: die Content-Security-Policy erlaubt nur Dateien von der eigenen Domain.
+- Externe Ressourcen (Fonts, CDNs, Analytics) nicht einbinden, sonst müssen CSP und Datenschutzerklärung angepasst werden.
+
+## Lokal ansehen und prüfen
 
 ```bash
-python3 -m http.server 8000
-# http://localhost:8000
+python -I tools/serve.py
+```
+
+Dann `http://127.0.0.1:8766` öffnen. Der Server sendet dieselben Header wie Netlify.
+
+```bash
+python -I tests/check_site.py
+```
+
+Nach Änderungen an `tools/og-vorlage.html` das Vorschaubild neu erzeugen:
+
+```bash
+python -I tools/render_bilder.py
 ```
 
 ## Deployment
 
-Vercel erkennt das Repo als statische Seite (kein Build-Befehl). Push auf `main`
-deployt automatisch. Die `vercel.json` setzt zusätzlich saubere URLs und einige
-Security-Header.
-
-## Inhalte ändern
-
-Texte, Animationen und Tokens sitzen alle in `index.html`. Das Design-System
-(Farben, Typo, Spacing) ist als CSS-Variablen am Anfang der Datei dokumentiert.
+Push auf `main` deployt über Netlify.
