@@ -140,30 +140,30 @@ p { margin: 0 0 1em; max-width: 36em; }
 
 /* Erfahrung: zwei lockere Wortwolken (Branchen, Themen), darunter drei zusammengerechnete Zahlen.
    Die Wörter verschieben sich beim Scrollen leicht gegeneinander (erfahrung.js), ohne Endlos-Animation. */
-.wolken { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px clamp(40px, 6vw, 112px); align-items: start; }
+.wolken { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px clamp(40px, 5vw, 96px); align-items: start; }
 .wolken-titel { font-size: 16px; font-weight: 400; color: var(--grau); margin: 0 0 18px; letter-spacing: 0; }
-.wolke { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 26px 30px; }
-.wolke li { line-height: 1.15; letter-spacing: -.02em; transform: translate3d(0, calc(var(--y, 0px) + var(--p, 0px)), 0); will-change: transform; }
-.wolke .g1 { font-size: clamp(28px, 3.2vw, 44px); font-weight: 500; }
-.wolke .g2 { font-size: clamp(21px, 2.1vw, 28px); font-weight: 400; }
-.wolke .g3 { font-size: clamp(17px, 1.5vw, 21px); font-weight: 400; color: var(--grau); letter-spacing: 0; }
+.wolke { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 22px 28px; }
+.wolke li { white-space: nowrap; line-height: 1.15; letter-spacing: -.02em; transform: translate3d(0, calc(var(--y, 0px) + var(--p, 0px)), 0); will-change: transform; }
+.wolke .g1 { font-size: clamp(26px, 2.6vw, 38px); font-weight: 500; }
+.wolke .g2 { font-size: clamp(20px, 1.8vw, 26px); font-weight: 400; }
+.wolke .g3 { font-size: clamp(17px, 1.3vw, 19px); font-weight: 400; color: var(--grau); letter-spacing: 0; }
 .wolke li:nth-child(3n+2) { --y: 5px; }
 .wolke li:nth-child(4n+3) { --y: -4px; }
 .wolke li:nth-child(5n+4) { --y: 8px; }
 /* versetzte Einzüge, damit die Wörter nicht an einer Kante kleben, sondern lose verteilt wirken */
-.branchen-wolke li:nth-child(2) { margin-left: 26%; }
-.branchen-wolke li:nth-child(3) { margin-left: 9%; }
-.branchen-wolke li:nth-child(4) { margin-left: 18%; }
+.branchen-wolke li:nth-child(2) { margin-left: 22%; }
+.branchen-wolke li:nth-child(3) { margin-left: 8%; }
+.branchen-wolke li:nth-child(4) { margin-left: 16%; }
 .branchen-wolke li:nth-child(5) { margin-left: 3%; }
-.themen-wolke li:nth-child(5n+3) { margin-left: 1.4em; }
-.themen-wolke li:nth-child(7n+5) { margin-left: 2.2em; }
-.wolke li { max-width: 100%; hyphens: auto; overflow-wrap: break-word; }
+.themen-wolke li:nth-child(3) { margin-left: 6%; }
+.themen-wolke li:nth-child(6) { margin-left: 14%; }
+.themen-wolke li:nth-child(9) { margin-left: 4%; }
 @media (max-width: 700px) {
-  .wolke { gap: 18px 22px; }
+  .wolke { gap: 16px 22px; }
   .wolke .g1 { font-size: 24px; }
-  .wolke .g2 { font-size: 20px; }
+  .wolke .g2 { font-size: 19px; }
   .branchen-wolke li:nth-child(n), .themen-wolke li:nth-child(n) { margin-left: 0; }
-  .branchen-wolke li:nth-child(even) { margin-left: 1.2em; }
+  .branchen-wolke li:nth-child(even), .themen-wolke li:nth-child(3n) { margin-left: 1em; }
 }
 .zahlen { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin: clamp(64px, 8vw, 112px) 0 0; padding-top: 28px; border-top: 1px solid var(--linie); }
 .zahlen div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 10px; }
