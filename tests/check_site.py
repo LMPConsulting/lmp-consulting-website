@@ -125,8 +125,22 @@ def pruefe_seiten() -> None:
                 fail("index.html: meta keywords entfernen")
             if "Gangelt" in text:
                 fail("index.html: „Gangelt“ soll auf der Startseite nicht erscheinen")
-            if len((datei.read_text(encoding='utf-8').split('<title>')[1].split('</title>')[0])) > 60:
+            roh = datei.read_text(encoding="utf-8")
+            if len(roh.split("<title>")[1].split("</title>")[0]) > 60:
                 fail("index.html: Titel länger als 60 Zeichen")
+            # Erfahrung: Wolken statt Zuordnung Branche -> Projekt, keine Detail-Fakten, kein Telefon
+            if "tel:" in roh or "+49 1573" in text or '"telephone"' in roh:
+                fail("index.html: Telefonnummer soll auf der Startseite nicht erscheinen")
+            for weg in ("Zertifizierung", "PRINCE2", "Methoden"):
+                if weg in text:
+                    fail(f"index.html: „{weg}“ soll entfernt sein")
+            for klasse in ('class="werkzeuge"', 'class="fakten"', 'class="branchen"'):
+                if klasse in roh:
+                    fail(f"index.html: {klasse} soll entfernt sein")
+            if 'class="wolke branchen-wolke"' not in roh or 'class="wolke themen-wolke"' not in roh:
+                fail("index.html: Branchen- und Themenwolke fehlen")
+            if roh.count("data-zahl=") != 3:
+                fail("index.html: genau drei hochzählende Zahlen erwartet")
         if name in ("impressum.html", "datenschutz.html", "404.html"):
             if "noindex" not in p.meta.get("robots", ""):
                 fail(f"{name}: robots noindex fehlt")
