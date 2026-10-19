@@ -42,4 +42,8 @@ python -I tools/render_bilder.py
 
 ## Deployment
 
-Push auf `main` deployt über Netlify.
+Push auf `main` deployt über Netlify (dauert etwa 20 Sekunden). Danach prüfen:
+
+```bash
+bash tools/check_live.sh
+```
