@@ -33,7 +33,7 @@ Die Domain `lmpconsulting.de` verschickt keine Mails. Diese Einträge sagen alle
 
 Falls später doch ein Postfach `@lmpconsulting.de` eingerichtet wird, müssen diese Einträge durch die des Mail-Anbieters ersetzt werden.
 
-## 3. E-Mail-Weiterleitung info@lmpconsulting.de → web.de
+## 3. E-Mail-Weiterleitung info@lmpconsulting.de → web.de (eingerichtet am 23.10.2026)
 
 Ziel: `info@lmpconsulting.de` bei Anmeldungen angeben können. Mails an diese Adresse landen im web.de-Postfach.
 Senden von dieser Adresse geht damit nicht. Antworten kommen weiterhin von `lmpconsulting@web.de`.
